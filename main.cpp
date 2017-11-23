@@ -5,6 +5,8 @@
 #include "Headers/Libs/String.h"
 #include "Headers/Libs/Array.h"
 #include "Headers/Models/Pakage.h"
+#include "Headers/Libs/CSV_reader.h"
+
 using namespace std;
 int main() {
     Random random;
@@ -18,6 +20,9 @@ int main() {
     array.push_back(Pakage{"inhoud "," locatie"});
 
    array[0].bestemming;
+    CSV_reader reader;
+    String path("/home/administrator/Documents/Workspace/CPP_her/Data/Pakketjes.csv");
+//    reader.get_data(path);
 
 
 

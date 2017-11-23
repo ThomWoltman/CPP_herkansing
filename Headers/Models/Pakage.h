@@ -11,6 +11,7 @@ class Pakage{
 public:
     Pakage():inhoud{""},bestemming{""}{};
     Pakage(char * inhoud, char *bestemming): inhoud{inhoud},bestemming{bestemming}{};
+    ~Pakage(){};
     String  inhoud;
     String bestemming;
 
