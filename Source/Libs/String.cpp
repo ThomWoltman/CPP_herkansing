@@ -9,6 +9,13 @@
 String::String(const char *charArray) : string{charArray} {
 
 }
+const void String::print() {
+
+    for(int i = 0;string[i]!='\0';i++){
+        cout <<string[i];
+    }
+
+}
 
 const bool String::equals(const char *char_array) const {
     if(string[0] == '\0')
