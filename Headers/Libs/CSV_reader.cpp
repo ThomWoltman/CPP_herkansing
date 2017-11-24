@@ -5,9 +5,9 @@
 
 #include "CSV_reader.h"
 
-Array<Pakage>  CSV_reader:: get_data(String path) {
+Array<Package>  CSV_reader:: get_data(String path) {
 
-    Array<Pakage> data(50);
+    Array<Package> data(50);
 
     ifstream ip(path.string);
     if (!ip.is_open()) cout << "ERROR: FIle Open" << endl;
@@ -16,13 +16,9 @@ Array<Pakage>  CSV_reader:: get_data(String path) {
 
     //loops untill there are no lines in document
     while (ip.good()) {
-        auto element = Pakage();
+        Package element;
 
-        string name2;
-        string name;
-        string line2;
         string line;
-
 
         getline(ip, line, '\r');
 
@@ -45,7 +41,6 @@ Array<Pakage>  CSV_reader:: get_data(String path) {
         // make city object
         data.push_back(element);
     }
-
 
     return data;
 };

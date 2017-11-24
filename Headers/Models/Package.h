@@ -7,11 +7,11 @@
 
 #include "../Libs/String.h"
 
-class Pakage{
+class Package{
 public:
-    Pakage():inhoud{""},bestemming{""}{};
-    Pakage(char * inhoud, char *bestemming): inhoud{inhoud},bestemming{bestemming}{};
-    ~Pakage(){};
+    Package():inhoud{""},bestemming{""}{};
+    Package(char * inhoud, char *bestemming): inhoud{inhoud},bestemming{bestemming}{};
+    ~Package(){};
     String  inhoud;
     String bestemming;
 

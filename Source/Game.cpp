@@ -12,9 +12,9 @@ Game::Game(int coins, Game_state game) : player{coins, &game}{
 }
 void Game::run() {
 
-    Main_state *game = new Main_state();
+    auto *game = new Main_state();
     player.game_state = game;
-    while (true) {
+    while (is_running) {
 
 
         player.game_state->run(&player);

@@ -11,14 +11,14 @@
 #include <sstream>
 #include "CSV_reader.h"
 #include "String.h"
-#include "../Models/Pakage.h"
+#include "../Models/Package.h"
 
 
 using namespace std;
 
 class CSV_reader {
 public:
-    Array<Pakage> get_data(String path);
+    Array<Package> get_data(String path);
 };
 
 

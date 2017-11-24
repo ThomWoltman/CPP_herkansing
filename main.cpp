@@ -4,7 +4,7 @@
 #include "Headers/State/Main_state.h"
 #include "Headers/Libs/String.h"
 #include "Headers/Libs/Array.h"
-#include "Headers/Models/Pakage.h"
+#include "Headers/Models/Package.h"
 #include "Headers/Libs/CSV_reader.h"
 
 using namespace std;
@@ -15,16 +15,14 @@ int main() {
 
 //    Game game{1000, Main_state()};
 //    game.run();
-    Array<Pakage> array{10};
+    Array<Package> array{10};
 
-    array.push_back(Pakage{"inhoud "," locatie"});
+    array.push_back(Package{"inhoud "," locatie"});
 
    array[0].bestemming;
     CSV_reader reader;
-    String path("/home/administrator/Documents/Workspace/CPP_her/Data/Pakketjes.csv");
-//    reader.get_data(path);
-
-
+    String path("/home/administrator/CLionProjects/CPP_herkansing/Data/Pakketjes.csv");
+    auto b = reader.get_data(path);
 
     return 0;
 }

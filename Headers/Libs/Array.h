@@ -7,6 +7,7 @@
 
 #include<iostream>
 #include<iomanip>
+#include <memory>
 
 template<class T>
 class Array
@@ -25,7 +26,7 @@ public:
 
     ~Array()
     {
-        delete elems;
+        delete[] elems;
     }
 
     T& operator[](int index)
@@ -37,6 +38,17 @@ public:
     {
         for(int i=0;i<size;i++)
             elems[i]=temp;
+    }
+
+    Array& operator=(const Array& other){
+        if(this != &other){
+            std::uninitialized_copy(other.elems[0], other.elems[other.size], elems);
+        }
+    }
+
+    T& operator=(T&& temp){
+        elems = temp[0];
+        return *this;
     }
 };
 
