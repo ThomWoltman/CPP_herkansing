@@ -10,9 +10,9 @@
 class Package{
 public:
     Package():inhoud{""},bestemming{""}{};
-    Package(char * inhoud, char *bestemming): inhoud{inhoud},bestemming{bestemming}{};
+    Package(const char *inhoud, const char *bestemming): inhoud{inhoud},bestemming{bestemming}{};
     ~Package(){};
-    String  inhoud;
+    String inhoud;
     String bestemming;
 
 private:

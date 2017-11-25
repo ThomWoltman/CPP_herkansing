@@ -16,13 +16,31 @@ class Array
     int used;
     int size;
 public:
-    Array(int s):size{s}, elems {new T[s]},used{0}{};
+    explicit Array(int s):size{s}, elems {new T[s]},used{0}{};
 
-    void push_back(T  elelement){
-        elems[used++] = elelement;
+    Array(Array& other){
+        std::uninitialized_copy(other.elems[0], other.elems[other.size], elems);
+        size = other.size;
+        used = other.used;
     }
 
+    Array(Array&& other) noexcept :
+            size{other.size},
+            used{other.used},
+            elems{other.elems} {
+        other.size = 0;
+        other.used = 0;
+        other.elems = nullptr;
+    }
 
+    void push_back(T element){
+        if(used < size){
+            elems[used++] = element;
+        }
+        else{
+            std::cout << "can't push back on array" << std::endl;
+        }
+    }
 
     ~Array()
     {
@@ -34,21 +52,28 @@ public:
         return elems[index];
     }
 
-    void operator=(T temp)
-    {
-        for(int i=0;i<size;i++)
-            elems[i]=temp;
-    }
-
-    Array& operator=(const Array& other){
-        if(this != &other){
-            std::uninitialized_copy(other.elems[0], other.elems[other.size], elems);
-        }
-    }
-
-    T& operator=(T&& temp){
-        elems = temp[0];
+    Array& operator=(const Array& other){ // copy assignment operator
+        Array temp {other}; // use copy constructor
+        *this = std::move(temp); // use move assignment operator
         return *this;
+    }
+
+    Array& operator=(Array&& other) noexcept { // move assignment operator
+        delete[] elems;
+
+        elems = other.elems;
+        used = other.used;
+        size = other.size;
+
+        other.elems = nullptr;
+        other.used = 0;
+        other.size = 0;
+
+        return *this;
+    }
+
+    int length() const{
+        return size;
     }
 };
 

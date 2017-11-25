@@ -9,21 +9,22 @@ Array<Package>  CSV_reader:: get_data(String path) {
 
     Array<Package> data(50);
 
-    ifstream ip(path.string);
+    ifstream ip(path.get_string());
     if (!ip.is_open()) cout << "ERROR: FIle Open" << endl;
     int counter1 = 0;
 
 
     //loops untill there are no lines in document
     while (ip.good()) {
-        Package element;
+
 
         string line;
 
         getline(ip, line, '\r');
 
         stringstream sentence;
-        if (counter1 != 0) { line.erase(0, 1); }
+        if (counter1 != 0)
+            line.erase(0, 1);
 
         sentence << line;
         string word;
@@ -31,9 +32,11 @@ Array<Package>  CSV_reader:: get_data(String path) {
 
 
         getline(sentence, word, ';');
-        element.inhoud = word.c_str();
+        auto inhoud = word.c_str();
         getline(sentence, word2, ';');
-        element.bestemming = word2.c_str();
+        auto bestemming = word2.c_str();
+
+        Package element {inhoud, bestemming};
 
 
         counter1++;

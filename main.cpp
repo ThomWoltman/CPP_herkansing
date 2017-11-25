@@ -24,5 +24,13 @@ int main() {
     String path("/home/administrator/CLionProjects/CPP_herkansing/Data/Pakketjes.csv");
     auto b = reader.get_data(path);
 
+    for(int i = 0; i < b.length() ;i++){
+        std::cout << i << ". ";
+        b[i].bestemming.print();
+        std::cout << " - ";
+        b[i].inhoud.print();
+        std::cout << std::endl;
+    }
+
     return 0;
 }
