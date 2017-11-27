@@ -8,19 +8,21 @@
 
 #include "Models/Player.h"
 #include "State/Game_state.h"
+#include "State/Game_state_context.h"
 
 
 class Game_state;
 
 class Game {
 public:
-    Game(int coins, Game_state game);
+    Game(int coins);
     void run();
     void quit();
 
 private:
     bool  is_running;
     Player player;
+    Game_state_context game_state_context;
 };
 
 

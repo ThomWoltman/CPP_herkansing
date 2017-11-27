@@ -9,12 +9,9 @@
 
 using namespace std;
 int main() {
-    Random random;
 
-    //std::cout << "Hello, World!" << random.get_random(0,20)<< std::endl;
-
-//    Game game{1000, Main_state()};
-//    game.run();
+    Game game1{1000};
+    game1.run();
     Array<Package> array{10};
 
     array.push_back(Package{"inhoud "," locatie"});

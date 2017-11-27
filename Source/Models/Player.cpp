@@ -5,6 +5,6 @@
 #include <iostream>
 #include "../../Headers/Models/Player.h"
 
-Player::Player(int coins, Game_state *g):game_state{g}, coins{coins}{
+Player::Player(int coins): coins{coins}{
 
 }

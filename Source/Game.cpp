@@ -7,18 +7,14 @@
 #include "../Headers/State/Main_state.h"
 
 
-Game::Game(int coins, Game_state game) : player{coins, &game}{
+Game::Game(int coins) : player{coins}{
     is_running = true;
 }
 void Game::run() {
 
-    auto *game = new Main_state();
-    player.game_state = game;
     while (is_running) {
-
-
-        player.game_state->run(&player);
-
+        game_state_context.get_current_state().run(player);
+        is_running = false;
     }
 }
 

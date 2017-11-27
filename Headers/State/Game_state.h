@@ -13,9 +13,10 @@ class Game_state {
 public:
     Game_state();
 
-    virtual void run(Player *player);
+    virtual void run(Player &player);
+    virtual void check_state();
     virtual void show();
-    virtual void handle_input(Player *player);
+    virtual void handle_input(Player &player);
 private:
 
 };

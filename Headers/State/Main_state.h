@@ -11,14 +11,11 @@
 class Main_state : public Game_state {
 public:
 
-void run(Player *player);
+void run(Player &player);
 
 void show() {}
 
-void handle_input(Player *player) {
-
-}
-
+void handle_input(Player &player) {}
 };
 
 

@@ -10,10 +10,7 @@ class Game_state;
 class Player {
 
     public:
-        Player(int coins, Game_state *g);
-
-        Game_state* game_state;
-
+        Player(int coins);
 
     private:
         int coins;
