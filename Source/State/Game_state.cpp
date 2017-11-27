@@ -14,7 +14,7 @@ void Game_state::show(){
 void Game_state::handle_input(Player &player){
 
 }
-void Game_state::run(Player &player){
+void Game_state::run(Player &player, Game_state_context &context){
     std::cout << "Hello I am state this works" << std::endl;
 
 }

@@ -7,13 +7,15 @@
 
 
 #include "../Models/Player.h"
+#include "Game_state_context.h"
+
 class Player;
 using namespace std;
 class Game_state {
 public:
     Game_state();
 
-    virtual void run(Player &player);
+    virtual void run(Player &player, Game_state_context &context);
     virtual void check_state();
     virtual void show();
     virtual void handle_input(Player &player);

@@ -12,11 +12,22 @@ public:
     Package():inhoud{""},bestemming{""}{};
     Package(const char *inhoud, const char *bestemming): inhoud{inhoud},bestemming{bestemming}{};
     ~Package(){};
-    String inhoud;
-    String bestemming;
+
+    friend ostream& operator<<(ostream& strm, Package &package) {
+        if(strm){
+            strm << package.inhoud << " - " << package.bestemming;
+        }
+
+        return strm;
+    }
+
+    const bool is_empty() const{
+        return inhoud.is_empty() && bestemming.is_empty();
+    }
 
 private:
-
+    String inhoud;
+    String bestemming;
 
 };
 

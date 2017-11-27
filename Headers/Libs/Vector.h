@@ -21,7 +21,12 @@ public:
     explicit Vector(int s):size{s}, elems{new T[s]}, used{0}{};
 
     Vector(Vector& other){
-        std::uninitialized_copy(other.elems[0], other.elems[other.size], elems);
+        elems = new T[other.size];
+
+        for(int i = 0; i < other.used; i++){
+            elems[i] = other.elems[i];
+        }
+
         size = other.size;
         used = other.used;
     }
@@ -80,8 +85,13 @@ public:
     }
 
     int length() const{
-        return size;
+        return used;
     }
+
+    void clear() {
+        Vector temp;
+        *this = std::move(temp);
+    };
 };
 
 

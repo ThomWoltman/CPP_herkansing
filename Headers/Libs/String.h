@@ -51,6 +51,12 @@ public:
         return *this;
     }
 
+    String& operator=(const char* arg){
+        delete[] cstring;
+        cstring = new char[std::strlen(arg)+1];
+        std::strcpy(cstring, arg);
+    }
+
     char operator[](int index)
     {
         return cstring[index];
@@ -76,8 +82,11 @@ public:
         return strm;
     }
 
-    const bool equals(const char* char_array) const;
-    const void print();
+    const bool operator==(const String &string) const{
+        return strcmp(cstring, string.get_string()) == 0;
+    }
+
+    const bool is_empty() const;
 
     char* get_string() const{
         return cstring;

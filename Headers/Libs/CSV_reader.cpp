@@ -17,7 +17,15 @@ Vector<Package>  CSV_reader:: get_data(String path) {
     while (ip) {
         char line[200];
 
+        if(counter1 == 24){
+            int i = 1;
+        }
+
         ip.getline(line, 200, '\r');
+
+        if(line[0] == '\000'){
+            break;
+        }
 
         stringstream sentence {line};
 
@@ -37,7 +45,8 @@ Vector<Package>  CSV_reader:: get_data(String path) {
         counter1++;
 
         // make city object
-        data.push_back(element);
+        if(!element.is_empty())
+            data.push_back(element);
     }
 
     return data;

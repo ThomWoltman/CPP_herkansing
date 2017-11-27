@@ -8,8 +8,8 @@
 
 class Random {
 public:
-    int get_random(int first, int secont);
-    //int get_random_char(string first);
+    const int get_random(const int first, const int second) const;
+private:
 
 };
 

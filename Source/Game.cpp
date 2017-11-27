@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "../Headers/Game.h"
-#include "../Headers/State/Main_state.h"
+#include "../Headers/State/HQ_state.h"
 
 
 Game::Game(int coins) : player{coins}{
@@ -13,8 +13,7 @@ Game::Game(int coins) : player{coins}{
 void Game::run() {
 
     while (is_running) {
-        game_state_context.get_current_state().run(player);
-        is_running = false;
+        game_state_context.get_current_state().run(player, game_state_context);
     }
 }
 

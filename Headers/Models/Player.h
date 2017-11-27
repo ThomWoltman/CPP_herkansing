@@ -11,11 +11,11 @@ class Player {
 
     public:
         Player(int coins);
-
+        void reset_dmg();
+        void add_damage(int dmg);
     private:
         int coins;
-
-
+        int damage;
 };
 
 

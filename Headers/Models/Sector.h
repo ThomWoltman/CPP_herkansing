@@ -5,11 +5,22 @@
 #ifndef CPP_HERKANSING_SECTOR_H
 #define CPP_HERKANSING_SECTOR_H
 
+#include <iostream>
+
+using namespace std;
 
 class Sector {
 public:
     Sector(int,int,int);
-    void print();
+    Sector();
+
+    friend ostream& operator<<(ostream& strm, const Sector &sector){
+        if(strm){
+            strm << sector.astr << sector.ont << sector.pla;
+        }
+
+        return strm;
+    }
 
 private:
     int astr;
