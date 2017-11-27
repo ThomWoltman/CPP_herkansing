@@ -24,6 +24,11 @@ int main() {
         b[i].inhoud.print();
         std::cout << std::endl;
     }
+    String input;
+
+    std::cin >> input;
+
+    std::cout << input << std::endl;
 
     return 0;
 }

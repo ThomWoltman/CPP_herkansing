@@ -16,6 +16,9 @@ public:
     {
         std::strcpy(cstring, arg); // populate
     }
+
+    explicit  String() : cstring(nullptr){}
+
     ~String()
     {
         delete[] cstring;  // deallocate
@@ -51,6 +54,26 @@ public:
     char operator[](int index)
     {
         return cstring[index];
+    }
+
+    friend istream& operator>>(istream& strm, String &string) {
+        if(strm){
+            char temp[50];
+
+            if(strm >> temp){
+                string = String{temp};
+            }
+        }
+
+        return strm;
+    }
+
+    friend ostream& operator<<(ostream& strm, String &string) {
+        if(strm){
+            strm << string.get_string();
+        }
+
+        return strm;
     }
 
     const bool equals(const char* char_array) const;
