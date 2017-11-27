@@ -3,7 +3,7 @@
 #include "Headers/Game.h"
 #include "Headers/State/Main_state.h"
 #include "Headers/Libs/String.h"
-#include "Headers/Libs/Array.h"
+#include "Headers/Libs/Vector.h"
 #include "Headers/Models/Package.h"
 #include "Headers/Libs/CSV_reader.h"
 
@@ -12,11 +12,7 @@ int main() {
 
     Game game1{1000};
     game1.run();
-    Array<Package> array{10};
 
-    array.push_back(Package{"inhoud "," locatie"});
-
-   array[0].bestemming;
     CSV_reader reader;
     String path("/home/administrator/CLionProjects/CPP_herkansing/Data/Pakketjes.csv");
     auto b = reader.get_data(path);

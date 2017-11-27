@@ -5,7 +5,7 @@
 #ifndef CPP_HERKANSING_CSV_READER_H
 #define CPP_HERKANSING_CSV_READER_H
 
-#include "Array.h"
+#include "Vector.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -17,7 +17,7 @@ using namespace std;
 
 class CSV_reader {
 public:
-    Array<Package> get_data(String path);
+    Vector<Package> get_data(String path);
 };
 
 

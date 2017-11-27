@@ -5,9 +5,9 @@
 
 #include "CSV_reader.h"
 
-Array<Package>  CSV_reader:: get_data(String path) {
+Vector<Package>  CSV_reader:: get_data(String path) {
 
-    Array<Package> data(50);
+    Vector<Package> data;
 
     ifstream ip(path.get_string());
     if (!ip.is_open()) cout << "ERROR: FIle Open" << endl;

@@ -5,7 +5,7 @@
 #include "../../Headers/State/Game_state_context.h"
 #include "../../Headers/State/Main_state.h"
 
-Game_state_context::Game_state_context() : states{Array<Game_state*>{1}} {
+Game_state_context::Game_state_context() : states{Vector<Game_state*>{1}} {
     currentstate = 0;
     states.push_back(new Main_state);
 }

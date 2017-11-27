@@ -7,7 +7,7 @@
 
 
 #include "Game_state.h"
-#include "../Libs/Array.h"
+#include "../Libs/Vector.h"
 
 class Game_state_context {
 public:
@@ -16,7 +16,7 @@ public:
     void set_state(int index);
     Game_state& get_current_state();
 private:
-    Array<Game_state*> states;
+    Vector<Game_state*> states;
     int currentstate;
 };
 

@@ -10,21 +10,23 @@
 #include <memory>
 
 template<class T>
-class Array
+class Vector
 {
     T *elems;
     int used;
     int size;
 public:
-    explicit Array(int s):size{s}, elems {new T[s]},used{0}{};
+    explicit Vector():size{8}, elems {new T[8]},used{0}{};
 
-    Array(Array& other){
+    explicit Vector(int s):size{s}, elems{new T[s]}, used{0}{};
+
+    Vector(Vector& other){
         std::uninitialized_copy(other.elems[0], other.elems[other.size], elems);
         size = other.size;
         used = other.used;
     }
 
-    Array(Array&& other) noexcept :
+    Vector(Vector&& other) noexcept :
             size{other.size},
             used{other.used},
             elems{other.elems} {
@@ -38,11 +40,16 @@ public:
             elems[used++] = element;
         }
         else{
-            std::cout << "can't push back on array" << std::endl;
+            Vector temp{size*2};
+            for(int i = 0; i < used; i++){
+                temp.push_back(elems[i]);
+            }
+            temp.push_back(element);
+            *this = std::move(temp);
         }
     }
 
-    ~Array()
+    ~Vector()
     {
         delete[] elems;
     }
@@ -52,13 +59,13 @@ public:
         return elems[index];
     }
 
-    Array& operator=(const Array& other){ // copy assignment operator
-        Array temp {other}; // use copy constructor
+    Vector& operator=(const Vector& other){ // copy assignment operator
+        Vector temp {other}; // use copy constructor
         *this = std::move(temp); // use move assignment operator
         return *this;
     }
 
-    Array& operator=(Array&& other) noexcept { // move assignment operator
+    Vector& operator=(Vector&& other) noexcept { // move assignment operator
         delete[] elems;
 
         elems = other.elems;
