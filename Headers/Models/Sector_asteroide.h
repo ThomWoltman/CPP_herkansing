@@ -6,7 +6,12 @@
 #define CPP_HERKANSING_SECTOR_ASTEROIDE_H
 
 
-class Sector_asteroide {
+#include "Sector_item.h"
+
+class Sector_asteroide : public Sector_item {
+public:
+
+    void print();
 
 };
 

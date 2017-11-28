@@ -7,11 +7,17 @@
 
 
 #include "Game_state.h"
+#include "../Models/Sector_item.h"
+
 
 class Sector_state : public Game_state {
 public:
     void run(Player &player, Game_state_context &context);
+    void create_field();
+    void draw_field();
+
 private:
+    Sector_item * field[10][10];
 };
 
 

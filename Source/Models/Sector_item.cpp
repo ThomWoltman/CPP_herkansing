@@ -2,4 +2,4 @@
 // Created by administrator on 28-11-17.
 //
 
-#include "Sector_item.h"
+#include "../../Headers/Models/Sector_item.h"

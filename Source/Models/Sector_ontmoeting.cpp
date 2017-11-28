@@ -2,4 +2,8 @@
 // Created by administrator on 28-11-17.
 //
 
-#include "Sector_ontmoeting.h"
+#include <iostream>
+#include "../../Headers/Models/Sector_ontmoeting.h"
+void Sector_ontmoeting::print() {
+    std::cout<<"*";
+}

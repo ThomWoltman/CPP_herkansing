@@ -2,4 +2,9 @@
 // Created by administrator on 28-11-17.
 //
 
-#include "Sector_emty.h"
+#include <iostream>
+#include "../../Headers/Models/Sector_emty.h"
+
+void  Sector_emty::print() {
+    std::cout << ".";
+}

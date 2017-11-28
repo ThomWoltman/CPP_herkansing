@@ -6,8 +6,11 @@
 #define CPP_HERKANSING_SECTOR_SHIP_H
 
 
-class Sector_ship {
+#include "Sector_item.h"
 
+class Sector_ship : public Sector_item {
+public:
+    void print();
 };
 
 

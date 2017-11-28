@@ -7,6 +7,9 @@
 
 
 class Sector_item {
+public:
+
+    virtual void print(){};
 
 };
 

@@ -2,4 +2,9 @@
 // Created by administrator on 28-11-17.
 //
 
-#include "Sector_asteroide.h"
+#include <iostream>
+#include "../../Headers/Models/Sector_asteroide.h"
+
+void Sector_asteroide::print() {
+    std::cout<<"O";
+}

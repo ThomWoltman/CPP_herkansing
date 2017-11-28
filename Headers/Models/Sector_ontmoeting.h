@@ -6,8 +6,12 @@
 #define CPP_HERKANSING_SECTOR_ONTMOETING_H
 
 
-class Sector_ontmoeting {
+#include "Sector_item.h"
 
+class Sector_ontmoeting : public Sector_item {
+public:
+
+    void print();
 };
 
 

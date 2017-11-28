@@ -6,8 +6,12 @@
 #define CPP_HERKANSING_SECTOR_EMTY_H
 
 
-class Sector_emty {
+#include "Sector_item.h"
 
+class Sector_emty : public Sector_item{
+public:
+
+    virtual void print();
 };
 
 

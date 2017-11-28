@@ -6,8 +6,13 @@
 #define CPP_HERKANSING_SECTOR_PLANEET_H
 
 
-class Sector_planeet {
+#include "Sector_item.h"
 
+class Sector_planeet : public Sector_item {
+public:
+
+
+    void print();
 };
 
 
