@@ -7,3 +7,8 @@
 void Sector_ship::print() {
     std::cout<<"P";
 }
+
+
+char Sector_ship::get_type() {
+    return 'P';
+}

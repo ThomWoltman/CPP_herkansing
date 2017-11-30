@@ -20,7 +20,11 @@ public:
         }
 
         return strm;
-    }
+    };
+    const int get_astr();
+    const int get_ont();
+    const int  get_pla();
+
 
 private:
     int astr;

@@ -8,3 +8,6 @@
 void Sector_asteroide::print() {
     std::cout<<"O";
 }
+char Sector_asteroide::get_type() {
+    return 'O';
+}

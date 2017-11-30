@@ -10,7 +10,7 @@
 
 class Sector_emty : public Sector_item{
 public:
-
+    char get_type();
     virtual void print();
 };
 

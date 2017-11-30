@@ -10,6 +10,7 @@
 
 class Sector_ship : public Sector_item {
 public:
+    char get_type();
     void print();
 };
 

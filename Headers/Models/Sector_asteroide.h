@@ -10,8 +10,9 @@
 
 class Sector_asteroide : public Sector_item {
 public:
-
+    char get_type();
     void print();
+
 
 };
 

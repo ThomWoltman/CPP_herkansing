@@ -11,3 +11,13 @@ Sector::Sector() {
     ont = rdm.get_random(0,3);
     pla = rdm.get_random(0,2);
 }
+const int  Sector::get_astr() {
+    return astr;
+}
+const int Sector::get_ont() {
+    return ont;
+}
+const int Sector::get_pla() {
+    return pla;
+}
+

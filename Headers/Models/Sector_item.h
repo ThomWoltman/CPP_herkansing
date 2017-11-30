@@ -10,6 +10,8 @@ class Sector_item {
 public:
 
     virtual void print(){};
+    virtual char get_type(){};
+
 
 };
 

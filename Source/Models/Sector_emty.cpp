@@ -8,3 +8,6 @@
 void  Sector_emty::print() {
     std::cout << ".";
 }
+char Sector_emty::get_type() {
+    return '.';
+}

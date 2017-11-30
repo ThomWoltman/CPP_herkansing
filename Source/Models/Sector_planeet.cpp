@@ -8,3 +8,6 @@
 void Sector_planeet::print() {
     std::cout<<"@";
 }
+char Sector_planeet::get_type() {
+    return '@';
+}

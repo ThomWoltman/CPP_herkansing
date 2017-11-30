@@ -7,3 +7,6 @@
 void Sector_ontmoeting::print() {
     std::cout<<"*";
 }
+char Sector_ontmoeting::get_type() {
+    return '*';
+}
