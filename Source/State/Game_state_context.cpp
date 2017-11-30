@@ -14,7 +14,8 @@ Game_state_context::Game_state_context() : states{Vector<Game_state*>{1}} {
 
 Game_state_context::~Game_state_context() {
     for(int i = 0; i < states.length(); i++){
-        delete states[i];
+        auto& state = states[i];
+        delete state;
     }
 }
 

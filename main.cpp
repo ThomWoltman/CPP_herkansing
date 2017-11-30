@@ -7,8 +7,10 @@
 using namespace std;
 int main() {
 
+    //String* str = new String{"bla"};
+
     Game game1{1000};
-     game1.run();
+    game1.run();
 
     CSV_reader reader;
     String path("/home/administrator/CLionProjects/CPP_herkansing/Data/Pakketjes.csv");
@@ -17,20 +19,6 @@ int main() {
     for(int i = 0; i < b.length() ;i++){
         std::cout << i << ". ";
         std::cout << b[i] << std::endl;
-    }
-
-
-    String input;
-    String compare{"hello"};
-
-    std::cin >> input;
-
-    std::cout << input << std::endl;
-
-    if (input == compare)
-        std::cout << "true" << std::endl;
-    else {
-        std::cout << "false" << std::endl;
     }
 
     return 0;

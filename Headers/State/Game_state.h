@@ -14,6 +14,7 @@ using namespace std;
 class Game_state {
 public:
     Game_state();
+    virtual ~Game_state(){};
 
     virtual void run(Player &player, Game_state_context &context);
     virtual void check_state();
