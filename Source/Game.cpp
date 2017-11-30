@@ -16,7 +16,7 @@ void Game::run() {
     while (is_running) {
         game_state_context.get_current_state().run(player, game_state_context);
         String input;
-        String compare{"hello"};
+        String compare{"quit"};
 
         std::cin >> input;
 
