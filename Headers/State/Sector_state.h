@@ -15,7 +15,7 @@ public:
     Sector_state();
     ~Sector_state() override;
     void run(Player &player, Game_state_context &context);
-
+    void pick_up_package();
 private:
 
 };

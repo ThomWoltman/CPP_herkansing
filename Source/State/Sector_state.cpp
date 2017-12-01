@@ -11,12 +11,27 @@
 #include "../../Headers/Models/Sector_asteroide.h"
 #include "../../Headers/Models/Sector_ontmoeting.h"
 #include "../../Headers/Models/Sector_ship.h"
+#include "../../Headers/Libs/CSV_reader.h"
 
 Sector_state::Sector_state() {
 
 }
 
 Sector_state::~Sector_state() {
+
+}
+void Sector_state::pick_up_package() {
+
+    CSV_reader reader;
+    String path("/home/administrator/Documents/CPP_herkansing/Data/Pakketjes.csv");
+    auto b = reader.get_data(path);
+
+    for(int i = 0; i < b.length() ;i++){
+        std::cout << i << ". ";
+        std::cout << b[i] << std::endl;
+    }
+    String input;
+    cin >> input;
 
 }
 
@@ -51,7 +66,7 @@ void Sector_state::run(Player &player, Game_state_context &context) {
         }
     }else if(str == "o"){
         if( context.get_current_sector().next_planet()){
-
+        pick_up_package();
         }
 
     }
