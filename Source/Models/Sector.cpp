@@ -11,6 +11,15 @@ Sector::Sector() {
     ont = rdm.get_random(0,3);
     pla = rdm.get_random(0,2);
 }
+
+Sector::~Sector() {
+//    for(auto& x : field){
+//        for(auto& y: x){
+//            delete y;
+//        }
+//    }
+}
+
 const int  Sector::get_astr() {
     return astr;
 }

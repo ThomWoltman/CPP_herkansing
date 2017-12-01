@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "../../Headers/Models/Sector_emty.h"
+#include "../../Headers/Models/Sector_empty.h"
 
 void  Sector_emty::print() {
     std::cout << ".";

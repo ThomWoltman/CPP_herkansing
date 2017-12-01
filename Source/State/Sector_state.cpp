@@ -4,13 +4,21 @@
 
 #include "../../Headers/State/Sector_state.h"
 #include "../../Headers/Models/Sector_item.h"
-#include "../../Headers/Models/Sector_emty.h"
+#include "../../Headers/Models/Sector_empty.h"
 #include "../../Headers/Libs/String.h"
 #include "../../Headers/Libs/Random.h"
 #include "../../Headers/Models/Sector_planeet.h"
 #include "../../Headers/Models/Sector_asteroide.h"
 #include "../../Headers/Models/Sector_ontmoeting.h"
 #include "../../Headers/Models/Sector_ship.h"
+
+Sector_state::Sector_state() {
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            field[i][j] = nullptr;
+        }
+    }
+}
 
 Sector_state::~Sector_state() {
     for(auto& x : field){
@@ -21,11 +29,11 @@ Sector_state::~Sector_state() {
 }
 
 void Sector_state::create_field(Sector sector) {
-
-
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
-                field[i][j] = new Sector_emty() ;
+            if(field[i][j] != nullptr)
+                delete field[i][j];
+            field[i][j] = new Sector_emty();
         }
     }
 
@@ -33,7 +41,7 @@ void Sector_state::create_field(Sector sector) {
     // add random planets
 
         int counter_pla = 0;
-        //loops untill al the planates are chosen
+        //loops until al the planetes are chosen
         while(counter_pla < sector.get_pla()){
             auto x =  random.get_random(0,9);
             auto y =  random.get_random(0,9);

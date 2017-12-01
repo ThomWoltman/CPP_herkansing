@@ -12,6 +12,7 @@
 
 class Sector_state : public Game_state {
 public:
+    Sector_state();
     ~Sector_state() override;
     void run(Player &player, Game_state_context &context);
     void create_field(Sector);
