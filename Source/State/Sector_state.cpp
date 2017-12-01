@@ -41,7 +41,7 @@ void Sector_state::run(Player &player, Game_state_context &context) {
     std::cout << "y = " << context.get_current_sector_y() << std::endl;
     std::cout << context.get_current_sector() << std::endl;
 
-    std::cout << "[w][a][s][d]: ";
+    std::cout << "[w][a][s][d][o]: ";
     String str;
     std::cin >> str;
 
