@@ -49,6 +49,11 @@ void Sector_state::run(Player &player, Game_state_context &context) {
         if(!context.get_current_sector().move_down()){
             context.next_sector(0,1);
         }
+    }else if(str == "o"){
+        if( context.get_current_sector().next_planet()){
+
+        }
+
     }
     else if(str == "quit"){
         context.game_over();

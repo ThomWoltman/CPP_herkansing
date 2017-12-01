@@ -81,6 +81,8 @@ public:
     bool move_right();
     bool move_up();
     bool move_down();
+    bool next_planet();
+
 
     const int get_player_x() const {return player_x;};
     const int get_player_y() const {return player_y;};

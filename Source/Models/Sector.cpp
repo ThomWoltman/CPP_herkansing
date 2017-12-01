@@ -151,6 +151,35 @@ bool Sector::move_up() {
     }
     return !out_of_bounds;
 }
+bool Sector::next_planet() {
+    bool next_planet = false;
+    if((!is_out_of_bounds(player_x, player_y, player_x, player_y-1)) && field[player_y-1][player_x]->get_type() == '@'){
+       next_planet = true;
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y-1))&&field[player_y-1][player_x-1]->get_type() == '@'){
+        next_planet = true;
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y )) && field[player_y][player_x-1]->get_type() == '@'){
+        next_planet = true;
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y+1)) && field[player_y+1][player_x+1]->get_type() == '@'){
+        next_planet = true;
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x, player_y+1)) && field[player_y+1][player_x]->get_type() == '@'){
+        next_planet = true;
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y))&&field[player_y][player_x+1]->get_type() == '@'){
+        next_planet = true;
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y-1))&&field[player_y-1][player_x+1]->get_type() == '@'){
+        next_planet = true;
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y+1))&&field[player_y+1][player_x-1]->get_type() == '@'){
+        next_planet = true;
+    }
+
+    return next_planet;
+}
 
 const bool Sector::is_out_of_bounds(int x1, int y1, int x2, int y2) const {
     return x2 > 9 || x2 < 0 || y2 < 0 || y2 > 9 || x1 < 0 || x1 > 9 || y1 > 9 || y1 < 0;
