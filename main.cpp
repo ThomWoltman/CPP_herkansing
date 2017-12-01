@@ -12,14 +12,14 @@ int main() {
     Game game1{1000};
     game1.run();
 
-    CSV_reader reader;
-    String path("/home/administrator/CLionProjects/CPP_herkansing/Data/Pakketjes.csv");
-    auto b = reader.get_data(path);
-
-    for(int i = 0; i < b.length() ;i++){
-        std::cout << i << ". ";
-        std::cout << b[i] << std::endl;
-    }
+//    CSV_reader reader;
+//    String path("/home/administrator/CLionProjects/CPP_herkansing/Data/Pakketjes.csv");
+//    auto b = reader.get_data(path);
+//
+//    for(int i = 0; i < b.length() ;i++){
+//        std::cout << i << ". ";
+//        std::cout << b[i] << std::endl;
+//    }
 
     return 0;
 }

@@ -19,6 +19,10 @@ Game_state_context::~Game_state_context() {
     }
 }
 
+void Game_state_context::clear_sectors() {
+
+}
+
 Game_state& Game_state_context::get_current_state() {
     return *states[currentstate];
 }
@@ -27,18 +31,37 @@ void Game_state_context::set_state(const int index) {
     currentstate = index;
 }
 
-Vector<Sector>& Game_state_context::get_sectors() {
-    return sectors;
+Sector* Game_state_context::get_sectors() {
+    return *sectors;
 }
 
-void Game_state_context::add_sector(const Sector &sector) {
-    sectors.push_back(sector);
+void Game_state_context::add_sectors() {
+    for(int y = 0; y < 5; ++y){
+        for(int x = 0; x < 5; ++x){
+            sectors[y][x] = Sector();
+        }
+    }
 }
 
 Sector& Game_state_context::get_current_sector() {
-    return sectors[currentsector];
+    return sectors[currentsector_x][currentsector_y];
 }
 
-void Game_state_context::set_current_sector(int index) {
-    currentsector = index;
+void Game_state_context::set_current_sector(const int x, const int y) {
+    currentsector_y = y;
+    currentsector_x = x;
+}
+
+void Game_state_context::next_sector(int x, int y) {
+    int next_x = get_current_sector().get_player_x() - 9*x;
+    int next_y = get_current_sector().get_player_y() - 9*y;
+
+    currentsector_x += x;
+    currentsector_y += y;
+
+    if(currentsector_x < 0 || currentsector_x > 4 || currentsector_y < 0 || currentsector_y > 4)
+        set_state(0);
+    else{
+        get_current_sector().initialize(next_x,next_y);
+    }
 }

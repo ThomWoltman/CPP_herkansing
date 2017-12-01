@@ -27,8 +27,11 @@ Sector::~Sector() {
     }
 }
 
-void Sector::initialize() {
+void Sector::initialize(const int x_pos, const int y_pos) {
     if(!is_initialized){
+        player_x = x_pos;
+        player_y = y_pos;
+
         create_field();
         is_initialized = true;
     }
@@ -42,6 +45,26 @@ void Sector::create_field() {
     }
 
     Random random;
+
+    if(player_x != -1 && player_y != -1){ // player position is set
+        delete field[player_y][player_x];
+        field[player_y][player_x] = new Sector_ship();
+    }
+    else{
+        bool is_placed = false;
+
+        while(!is_placed){
+            auto x =  random.get_random(0,9);
+            auto y =  random.get_random(0,9);
+            if(field[y][x]->get_type() == '.') {
+                player_x = x;
+                player_y = y;
+                delete field[y][x];
+                field[y][x] = new Sector_ship();
+                is_placed = true;
+            }
+        }
+    }
     // add random planets
 
     int counter_pla = 0;
@@ -49,11 +72,12 @@ void Sector::create_field() {
     while(counter_pla < pla){
         auto x =  random.get_random(0,9);
         auto y =  random.get_random(0,9);
-        delete field[y][x];
-        field[y][x] = new Sector_planeet();
-        counter_pla++;
+        if(field[y][x]->get_type() == '.') {
+            delete field[y][x];
+            field[y][x] = new Sector_planeet();
+            counter_pla++;
+        }
     }
-
 
     // add random astoids
     int counter_astr = 0;
@@ -61,10 +85,11 @@ void Sector::create_field() {
     while(counter_astr < astr){
         auto x =  random.get_random(0,9);
         auto y =  random.get_random(0,9);
-        delete field[y][x];
-        field[y][x] = new Sector_asteroide();
-        counter_astr++;
-
+        if(field[y][x]->get_type() == '.'){
+            delete field[y][x];
+            field[y][x] = new Sector_asteroide();
+            counter_astr++;
+        }
     }
 
     // add random ontmoetingen
@@ -73,20 +98,12 @@ void Sector::create_field() {
     while(counter_ont < ont){
         auto x =  random.get_random(0,9);
         auto y =  random.get_random(0,9);
-        delete field[y][x];
-        field[y][x] = new Sector_ontmoeting();
-        counter_ont++;
-
+        if(field[y][x]->get_type() == '.') {
+            delete field[y][x];
+            field[y][x] = new Sector_ontmoeting();
+            counter_ont++;
+        }
     }
-
-    auto x =  random.get_random(0,9);
-    auto y =  random.get_random(0,9);
-
-    player_x = x;
-    player_y = y;
-
-    delete field[y][x];
-    field[y][x] = new Sector_ship();
 }
 
 const int  Sector::get_astr() {
@@ -100,40 +117,51 @@ const int Sector::get_pla() {
 }
 
 bool Sector::move_left() {
-    bool can_move = swap_fields(player_x, player_y, player_x-1, player_y);
-    if(can_move)
+    bool out_of_bounds = is_out_of_bounds(player_x, player_y, player_x-1, player_y);
+    if(!out_of_bounds && field[player_y][player_x-1]->get_type() == '.'){
+        swap_fields(player_x, player_y, player_x-1, player_y);
         player_x -= 1;
-    return can_move;
+    }
+    return !out_of_bounds;
 }
 
 bool Sector::move_right() {
-    bool can_move = swap_fields(player_x, player_y, player_x+1, player_y);
-    if(can_move)
+    bool out_of_bounds = is_out_of_bounds(player_x, player_y, player_x+1, player_y);
+    if(!out_of_bounds && field[player_y][player_x+1]->get_type() == '.'){
+        swap_fields(player_x, player_y, player_x+1, player_y);
         player_x += 1;
-    return can_move;
+    }
+    return !out_of_bounds;
 }
 
 bool Sector::move_down() {
-    bool can_move = swap_fields(player_x, player_y, player_x, player_y+1);
-    if(can_move)
+    bool out_of_bounds = is_out_of_bounds(player_x, player_y, player_x, player_y+1);
+    if(!out_of_bounds && field[player_y+1][player_x]->get_type() == '.'){
+        swap_fields(player_x, player_y, player_x, player_y+1);
         player_y += 1;
-    return can_move;
+    }
+    return !out_of_bounds;
 }
 
 bool Sector::move_up() {
-    bool can_move = swap_fields(player_x, player_y, player_x, player_y-1);
-    if(can_move)
+    bool out_of_bounds = is_out_of_bounds(player_x, player_y, player_x, player_y-1);
+    if(!out_of_bounds && field[player_y-1][player_x]->get_type() == '.'){
+        swap_fields(player_x, player_y, player_x, player_y-1);
         player_y -= 1;
-    return can_move;
+    }
+    return !out_of_bounds;
+}
+
+const bool Sector::is_out_of_bounds(int x1, int y1, int x2, int y2) const {
+    return x2 > 9 || x2 < 0 || y2 < 0 || y2 > 9 || x1 < 0 || x1 > 9 || y1 > 9 || y1 < 0;
 }
 
 bool Sector::swap_fields(int x1, int y1, int x2, int y2) {
-    bool can_swap = !(x2 > 9 || x2 < 0 || y2 < 0 || y2 > 9 || x1 < 0 || x1 > 9 || y1 > 9 || y1 < 0);
+    bool can_swap = !(x2 > 9 || x2 < 0 || y2 < 0 || y2 > 9 || x1 < 0 || x1 > 9 || y1 > 9 || y1 < 0) && field[y2][x2]->get_type() == '.';
     if(can_swap) {
         auto *f = field[y1][x1];
         field[y1][x1] = field[y2][x2];
         field[y2][x2] = f;
     }
     return can_swap;
-
 }

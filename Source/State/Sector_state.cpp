@@ -22,23 +22,33 @@ Sector_state::~Sector_state() {
 
 void Sector_state::run(Player &player, Game_state_context &context) {
     std::cout << "Sector" << std::endl;
+    std::cout << "x = " << context.get_current_sector_x() << std::endl;
+    std::cout << "y = " << context.get_current_sector_y() << std::endl;
     std::cout << context.get_current_sector() << std::endl;
 
+    std::cout << "[w][a][s][d]: ";
     String str;
-
     std::cin >> str;
 
     if(str == "d"){
-        context.get_current_sector().move_right();
+        if(!context.get_current_sector().move_right()){
+            context.next_sector(1,0);
+        }
     }
     else if(str == "a"){
-        context.get_current_sector().move_left();
+        if(!context.get_current_sector().move_left()){
+            context.next_sector(-1,0);
+        }
     }
     else if(str == "w"){
-        context.get_current_sector().move_up();
+        if(!context.get_current_sector().move_up()){
+            context.next_sector(0,-1);
+        }
     }
     else if(str == "s"){
-        context.get_current_sector().move_down();
+        if(!context.get_current_sector().move_down()){
+            context.next_sector(0,1);
+        }
     }
     else if(str == "quit"){
         context.game_over();
