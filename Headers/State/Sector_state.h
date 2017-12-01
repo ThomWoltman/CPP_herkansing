@@ -15,11 +15,9 @@ public:
     Sector_state();
     ~Sector_state() override;
     void run(Player &player, Game_state_context &context);
-    void create_field(Sector);
-    void draw_field();
 
 private:
-    Sector_item* field[10][10];
+
 };
 
 

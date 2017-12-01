@@ -9,8 +9,10 @@
 class Sector_item {
 public:
 
-    virtual void print(){};
-    virtual char get_type(){};
+    virtual void print() const{};
+    virtual char get_type() const{
+        return '#';
+    };
 
 
 };

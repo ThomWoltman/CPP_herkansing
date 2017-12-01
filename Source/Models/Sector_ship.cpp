@@ -9,6 +9,6 @@ void Sector_ship::print() {
 }
 
 
-char Sector_ship::get_type() {
+char Sector_ship::get_type() const{
     return 'P';
 }

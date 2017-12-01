@@ -86,6 +86,10 @@ public:
         return strcmp(cstring, string.get_string()) == 0;
     }
 
+    const bool operator==(const char* arg) const{
+        return strcmp(cstring, arg) == 0;
+    }
+
     const bool is_empty() const;
 
     char* get_string() const{

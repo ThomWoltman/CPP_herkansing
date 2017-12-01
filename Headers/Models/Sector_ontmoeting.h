@@ -10,7 +10,7 @@
 
 class Sector_ontmoeting : public Sector_item {
 public:
-    char get_type();
+    char get_type() const override;
 
     void print();
 };

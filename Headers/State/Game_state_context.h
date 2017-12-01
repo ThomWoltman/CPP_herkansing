@@ -19,11 +19,18 @@ public:
     void add_sector(const Sector &sector);
     Sector& get_current_sector();
     void set_current_sector(int index);
+    void game_over(){
+        winning = false;
+    }
+    bool is_winning() const{
+        return winning;
+    }
 private:
     Vector<Game_state*> states;
     int currentstate;
     Vector<Sector> sectors;
     int currentsector;
+    bool winning = true;
 };
 
 

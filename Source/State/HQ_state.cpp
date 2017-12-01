@@ -12,7 +12,8 @@ void HQ_state::run(Player &player, Game_state_context &context) {
     }
 
     for(int i = 0; i < context.get_sectors().length(); i++){
-        std::cout << context.get_sectors()[i] << " ";
+        auto s = context.get_sectors()[i];
+        std::cout << s.get_astr() << s.get_ont() << s.get_pla() << " ";
         if((i+1)%5 == 0)
             std::cout << std::endl;
     }
@@ -27,5 +28,6 @@ void HQ_state::run(Player &player, Game_state_context &context) {
     }
 
     context.set_current_sector(input);
+    context.get_current_sector().initialize();
     context.set_state(1);
 }

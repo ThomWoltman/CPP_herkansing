@@ -20,7 +20,7 @@ public:
 
     explicit Vector(int s):size{s}, elems{new T[s]}, used{0}{};
 
-    Vector(Vector& other){
+    Vector(const Vector& other){
         elems = new T[other.size];
 
         for(int i = 0; i < other.used; i++){
@@ -40,7 +40,7 @@ public:
         other.elems = nullptr;
     }
 
-    void push_back(T element){
+    void push_back(const T& element){
         if(used < size){
             elems[used++] = element;
         }
@@ -59,7 +59,7 @@ public:
         delete[] elems;
     }
 
-    T& operator[](int index)
+    T& operator[](int index) const
     {
         return elems[index];
     }
