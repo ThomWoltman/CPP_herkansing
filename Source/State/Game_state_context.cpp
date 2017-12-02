@@ -65,3 +65,10 @@ void Game_state_context::next_sector(int x, int y) {
         get_current_sector().initialize(next_x,next_y);
     }
 }
+
+Package& Game_state_context::get_current_package() {
+    return current_package;
+}
+void Game_state_context::set_current_package(Package package) {
+    current_package = package;
+}

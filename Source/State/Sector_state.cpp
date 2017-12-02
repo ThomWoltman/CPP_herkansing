@@ -14,13 +14,12 @@
 #include "../../Headers/Libs/CSV_reader.h"
 
 Sector_state::Sector_state() {
-
 }
 
 Sector_state::~Sector_state() {
 
 }
-void Sector_state::pick_up_package() {
+void Sector_state::pick_up_package(Game_state_context & game_context) {
 
     CSV_reader reader;
     String path("/home/administrator/Documents/CPP_herkansing/Data/Pakketjes.csv");
@@ -30,8 +29,25 @@ void Sector_state::pick_up_package() {
         std::cout << i << ". ";
         std::cout << b[i] << std::endl;
     }
+    std::cout << "which package do you want to pick up?" << std::endl;
+
     String input;
     cin >> input;
+    int number = -1;
+    try {
+      number = std::stoi(input.get_string());
+    } catch (std::exception const &e) {
+        std::cout << "No number entered" << std::endl;
+
+    }
+    if(number > -1 && number < b.length()){
+        Package p = b[number];
+        game_context.set_current_package(p);
+    }else{
+        std::cout << "No correct number entered" << std::endl;
+
+    }
+
 
 }
 
@@ -40,6 +56,7 @@ void Sector_state::run(Player &player, Game_state_context &context) {
     std::cout << "x = " << context.get_current_sector_x() << std::endl;
     std::cout << "y = " << context.get_current_sector_y() << std::endl;
     std::cout << context.get_current_sector() << std::endl;
+    std::cout << context.get_current_package() << std::endl;
 
     std::cout << "[w][a][s][d][o]: ";
     String str;
@@ -66,7 +83,7 @@ void Sector_state::run(Player &player, Game_state_context &context) {
         }
     }else if(str == "o"){
         if( context.get_current_sector().next_planet()){
-        pick_up_package();
+        pick_up_package(context);
         }
 
     }
