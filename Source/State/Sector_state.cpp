@@ -90,4 +90,5 @@ void Sector_state::run(Player &player, Game_state_context &context) {
     else if(str == "quit"){
         context.game_over();
     }
+    context.get_current_sector().move_meetings();
 }

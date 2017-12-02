@@ -76,6 +76,7 @@ public:
     const int get_ont();
     const int get_pla();
     void initialize(int x_pos = -1, int y_pos = -1);
+    void move_meetings();
 
     bool move_left();
     bool move_right();

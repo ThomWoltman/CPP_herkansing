@@ -181,6 +181,38 @@ bool Sector::next_planet() {
     return next_planet;
 }
 
+void Sector::move_meetings() {
+    for(int y = 0; y < 10; y++){
+        for(int x = 0; x < 10; x++){
+            if(field[y][x]->get_type() =='O'){
+               int t_x = x;
+               int t_y = y;
+                if(player_x < x){
+                    swap_fields(t_x, t_y, t_x-1, t_y);
+                    t_x = t_x-1;
+
+
+                }else{
+                    swap_fields(t_x, t_y, t_x+1, t_y);
+                    t_x = t_x+1;
+                }
+
+                if(player_y < t_y){
+                    swap_fields(t_x, t_y, t_x, t_y-1);
+                    t_y = t_y-1;
+
+
+                }else{
+                    swap_fields(t_x, t_y, t_x, t_y+1);
+                    t_y = t_y+1;
+
+
+                }
+            }
+        }
+    }
+}
+
 const bool Sector::is_out_of_bounds(int x1, int y1, int x2, int y2) const {
     return x2 > 9 || x2 < 0 || y2 < 0 || y2 > 9 || x1 < 0 || x1 > 9 || y1 > 9 || y1 < 0;
 }
