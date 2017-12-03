@@ -59,6 +59,10 @@ void Sector_state::run(Player &player, Game_state_context &context) {
     std::cout << context.get_current_sector() << std::endl;
     std::cout << context.get_current_package() << std::endl;
 
+    if(context.get_current_sector().next_to('*')){
+        context.set_state(2);
+    }
+
     std::cout << "[w][a][s][d][o][quit]: ";
     String str;
     std::cin >> str;
@@ -92,11 +96,5 @@ void Sector_state::run(Player &player, Game_state_context &context) {
         context.game_over();
     }
     context.get_current_sector().move_meetings();
-    if(context.get_current_sector().next_to('*')){
-        context.set_state(2);
-    }
-
-
-
 
 }
