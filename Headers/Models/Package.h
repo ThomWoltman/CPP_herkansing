@@ -38,6 +38,11 @@ public:
         y = planet_y;
     }
 
+    const int get_planet_x() const {return x;}
+    const int get_planet_y() const {return y;}
+    const int get_sector_x() const {return sector_x;}
+    const int get_sector_y() const {return sector_y;}
+
 private:
     String inhoud;
     String bestemming;

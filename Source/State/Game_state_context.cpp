@@ -14,8 +14,6 @@ Game_state_context::Game_state_context() : states{Vector<Game_state*>{3}} {
     states.push_back(new Sector_state);
     states.push_back(new Meeting_state);
     states.push_back(new Fight_state);
-
-
 }
 
 Game_state_context::~Game_state_context() {

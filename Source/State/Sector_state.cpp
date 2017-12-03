@@ -99,6 +99,8 @@ void Sector_state::pick_up_package(Game_state_context & game_context) {
 }
 
 void Sector_state::run(Player &player, Game_state_context &context) {
+    auto pkg = context.get_current_package();
+    std::cout << "win points: " << player.get_win_point() << std::endl;
     std::cout << "Sector" << std::endl;
     std::cout << "x = " << context.get_current_sector_x() << std::endl;
     std::cout << "y = " << context.get_current_sector_y() << std::endl;
@@ -113,7 +115,15 @@ void Sector_state::run(Player &player, Game_state_context &context) {
         if(context.get_current_sector().next_to('@')){
             std::cout << "[pick up(p)]-";
         }
-        std::cout << "[deliver(e)]-[view package(v)]-[do nothing(n)]-[quit(q)]: " << std::endl;
+
+        if(!pkg.is_empty() && context.get_current_sector().next_to('@') && context.get_current_sector_x() == pkg.get_sector_x() && context.get_current_sector_y() == pkg.get_sector_y()){
+            int difference_x = std::abs(pkg.get_planet_x() - context.get_current_sector().get_player_x());
+            int difference_y = std::abs(pkg.get_planet_y() - context.get_current_sector().get_player_y());
+            if(difference_x + difference_y <=1){
+                std::cout << "[deliver(e)]-";
+            }
+        }
+        std::cout << "[view package(v)]-[do nothing(n)]-[quit(q)]: " << std::endl;
         handle_input(player, context);
         context.get_current_sector().move_meetings();
     }
@@ -150,6 +160,15 @@ void Sector_state::handle_input(Player &player, Game_state_context &context) {
         }
 
     } else if(str == "deliver" || str == "e"){
+        auto pkg = context.get_current_package();
+        if(!pkg.is_empty() && context.get_current_sector().next_to('@') && context.get_current_sector_x() == pkg.get_sector_x() && context.get_current_sector_y() == pkg.get_sector_y()){
+            int difference_x = std::abs(pkg.get_planet_x() - context.get_current_sector().get_player_x());
+            int difference_y = std::abs(pkg.get_planet_y() - context.get_current_sector().get_player_y());
+            if(difference_x + difference_y <=1){
+                player.add_win_point();
+                context.set_current_package(Package());
+            }
+        }
 
     } else if(str == "view package" || str == "v"){
         cout << context.get_current_package();

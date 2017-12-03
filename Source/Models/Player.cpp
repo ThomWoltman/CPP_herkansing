@@ -16,3 +16,7 @@ void Player::reset_dmg() {
 void Player::add_damage(const int dmg) {
     damage += dmg;
 }
+
+void Player::add_win_point() { win_points++;}
+
+const int Player::get_win_point() const {return win_points;}
