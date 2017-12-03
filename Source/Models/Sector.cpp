@@ -151,30 +151,30 @@ bool Sector::move_up() {
     }
     return !out_of_bounds;
 }
-bool Sector::next_planet() {
+bool Sector::next_to(const char c) {
     bool next_planet = false;
-    if((!is_out_of_bounds(player_x, player_y, player_x, player_y-1)) && field[player_y-1][player_x]->get_type() == '@'){
+    if((!is_out_of_bounds(player_x, player_y, player_x, player_y-1)) && field[player_y-1][player_x]->get_type() == c){
        next_planet = true;
     }
-    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y-1))&&field[player_y-1][player_x-1]->get_type() == '@'){
+    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y-1))&&field[player_y-1][player_x-1]->get_type() == c){
         next_planet = true;
     }
-    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y )) && field[player_y][player_x-1]->get_type() == '@'){
+    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y )) && field[player_y][player_x-1]->get_type() == c){
         next_planet = true;
     }
-    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y+1)) && field[player_y+1][player_x+1]->get_type() == '@'){
+    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y+1)) && field[player_y+1][player_x+1]->get_type() == c){
         next_planet = true;
     }
-    if((!is_out_of_bounds(player_x, player_y, player_x, player_y+1)) && field[player_y+1][player_x]->get_type() == '@'){
+    if((!is_out_of_bounds(player_x, player_y, player_x, player_y+1)) && field[player_y+1][player_x]->get_type() == c){
         next_planet = true;
     }
-    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y))&&field[player_y][player_x+1]->get_type() == '@'){
+    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y))&&field[player_y][player_x+1]->get_type() == c){
         next_planet = true;
     }
-    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y-1))&&field[player_y-1][player_x+1]->get_type() == '@'){
+    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y-1))&&field[player_y-1][player_x+1]->get_type() == c){
         next_planet = true;
     }
-    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y+1))&&field[player_y+1][player_x-1]->get_type() == '@'){
+    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y+1))&&field[player_y+1][player_x-1]->get_type() == c){
         next_planet = true;
     }
 

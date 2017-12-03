@@ -83,7 +83,7 @@ void Sector_state::run(Player &player, Game_state_context &context) {
             context.next_sector(0,1);
         }
     }else if(str == "o"){
-        if( context.get_current_sector().next_planet()){
+        if( context.get_current_sector().next_to('@')){
         pick_up_package(context);
         }
 
@@ -92,4 +92,11 @@ void Sector_state::run(Player &player, Game_state_context &context) {
         context.game_over();
     }
     context.get_current_sector().move_meetings();
+    if(context.get_current_sector().next_to('*')){
+        context.set_state(2);
+    }
+
+
+
+
 }
