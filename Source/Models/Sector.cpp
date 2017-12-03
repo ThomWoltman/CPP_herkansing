@@ -184,7 +184,7 @@ bool Sector::next_planet() {
 void Sector::move_meetings() {
     for(int y = 0; y < 10; y++){
         for(int x = 0; x < 10; x++){
-            if(field[y][x]->get_type() =='O'){
+            if(field[y][x]->get_type() =='*'){
                int t_x = x;
                int t_y = y;
                 if(player_x < x && field[y][x-1]->get_type() != 'P'){

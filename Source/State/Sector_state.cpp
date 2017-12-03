@@ -22,7 +22,8 @@ Sector_state::~Sector_state() {
 void Sector_state::pick_up_package(Game_state_context & game_context) {
 
     CSV_reader reader;
-    String path("/home/administrator/Documents/CPP_herkansing/Data/Pakketjes.csv");
+    String path("/home/administrator/Documents/CPP_herkansing/Data/Pakketjes.csv"); // glenn local path
+    //String path("/home/administrator/CLionProjects/CPP_herkansing/Data/Pakketjes.csv") // thom local path
     auto b = reader.get_data(path);
 
     for(int i = 0; i < b.length() ;i++){
@@ -58,7 +59,7 @@ void Sector_state::run(Player &player, Game_state_context &context) {
     std::cout << context.get_current_sector() << std::endl;
     std::cout << context.get_current_package() << std::endl;
 
-    std::cout << "[w][a][s][d][o]: ";
+    std::cout << "[w][a][s][d][o][quit]: ";
     String str;
     std::cin >> str;
 
