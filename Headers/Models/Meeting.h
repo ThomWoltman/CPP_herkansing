@@ -10,7 +10,7 @@
 
 class Meeting {
 public:
-    Meeting(){};
+    Meeting():meeting{""}{};
     Meeting(const char *meeting, const char *gevecht_fry,const char *tekst_leela,const char *onderhandeling_leela,const char *succes_bender,const char *gefaald_bender)
             : meeting{meeting},gevecht_fry{gevecht_fry}, tekst_leela{tekst_leela},onderhandeling_leela{onderhandeling_leela},succes_bender{succes_bender}, gefaald_bender{gefaald_bender}
     {};
@@ -28,13 +28,14 @@ public:
         return meeting.is_empty();
     }
 
-private:
-    String meeting;
+    String meeting ;
     String gevecht_fry;
     String tekst_leela;
     String onderhandeling_leela;
     String succes_bender;
     String gefaald_bender;
+private:
+
 
 
 };

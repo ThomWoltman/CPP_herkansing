@@ -58,14 +58,15 @@ void Sector_state::run(Player &player, Game_state_context &context) {
     std::cout << "y = " << context.get_current_sector_y() << std::endl;
     std::cout << context.get_current_sector() << std::endl;
     std::cout << context.get_current_package() << std::endl;
+    if(context.get_current_sector().next_to('*')){
+        context.set_state(2);
+    }
 
     std::cout << "move: [w]-[a]-[s]-[d]" << std::endl << "actions: " << "[pick up(p)]-[deliver(e)]-[view package(v)]-[do nothing(n)]-[quit(q)]: " << std::endl;
 
     handle_input(player, context);
     context.get_current_sector().move_meetings();
-    if(context.get_current_sector().next_to('*')){
-        context.set_state(2);
-    }
+
 }
 
 void Sector_state::handle_input(Player &player, Game_state_context &context) {
