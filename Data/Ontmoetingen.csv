@@ -1,10 +1,4 @@
-﻿# eerste kolom bevat de omschrijving van de ontmoeting;;;;;
-# tweede kolom bevat de gevecht consequentie (Fry);;;;;
-# derde kolom bevat de onderhandeltekst (Leela);;;;;
-# vierde kolom bevat de onderhandelconsequentie (Leela);;;;;
-# vijfde kolom bevat de onderhands success consequentie (Bender);;;;;
-# zesde kolom bevat de onderhands gefaald consequentie (Bender);;;;;
-Anti-Human Patrol;[1-6];These humans are guilty of the crime of being humans!;[3-18];[3-18];Crew is disguised as robots.
+﻿anti-Human Patrol;[1-6];These humans are guilty of the crime of being humans!;[3-18];[3-18];Crew is disguised as robots.
 Giant Space Bee;[1-6];Bzzzzzz;[2-12];[2-12];Steal some space honey. [vp+1]
 Space Bee Queen;[3-18];You try keeping your figure after 10,000 kids.;[1-6];[3-18];Steal some space honey. [vp+1]
 Hydroponic Farmer;[1-6];Looky here city girl, oxygen don't grow on trees. ;[0];[2-12];Bender romances the Crushinator robot

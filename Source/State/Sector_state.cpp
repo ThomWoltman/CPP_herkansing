@@ -92,4 +92,5 @@ void Sector_state::run(Player &player, Game_state_context &context) {
         context.game_over();
     }
     context.get_current_sector().move_meetings();
+
 }
