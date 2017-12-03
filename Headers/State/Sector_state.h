@@ -17,7 +17,7 @@ public:
     void run(Player &player, Game_state_context &context);
     void pick_up_package(Game_state_context & game_context);
 private:
-
+    void handle_input(Player &player, Game_state_context &context);
 };
 
 

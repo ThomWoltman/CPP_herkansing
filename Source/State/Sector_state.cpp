@@ -59,7 +59,13 @@ void Sector_state::run(Player &player, Game_state_context &context) {
     std::cout << context.get_current_sector() << std::endl;
     std::cout << context.get_current_package() << std::endl;
 
-    std::cout << "[w][a][s][d][o][quit]: ";
+    std::cout << "move: [w]-[a]-[s]-[d]" << std::endl << "actions: " << "[pick up(p)]-[deliver(e)]-[view package(v)]-[do nothing(n)]-[quit(q)]: " << std::endl;
+
+    handle_input(player, context);
+}
+
+void Sector_state::handle_input(Player &player, Game_state_context &context) {
+    std::cout << "input: ";
     String str;
     std::cin >> str;
 
@@ -82,21 +88,24 @@ void Sector_state::run(Player &player, Game_state_context &context) {
         if(!context.get_current_sector().move_down()){
             context.next_sector(0,1);
         }
-    }else if(str == "o"){
+    }else if(str == "pick up" || str == "p"){
         if( context.get_current_sector().next_to('@')){
-        pick_up_package(context);
+            pick_up_package(context);
         }
 
+    } else if(str == "deliver" || str == "e"){
+
+    } else if(str == "view package" || str == "v"){
+
+    }else if(str == "do nothing" || str == "n"){
+
     }
-    else if(str == "quit"){
+
+    else if(str == "quit" || str == "q"){
         context.game_over();
     }
     context.get_current_sector().move_meetings();
     if(context.get_current_sector().next_to('*')){
         context.set_state(2);
     }
-
-
-
-
 }
