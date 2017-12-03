@@ -10,8 +10,8 @@
 
 class Sector_emty : public Sector_item{
 public:
+    Sector_emty() : Sector_item('.'){};
     char get_type() const override;
-    virtual void print();
 };
 
 

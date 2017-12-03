@@ -10,9 +10,8 @@
 
 class Sector_ontmoeting : public Sector_item {
 public:
+    Sector_ontmoeting():Sector_item('*'){};
     char get_type() const override;
-
-    void print();
 };
 
 

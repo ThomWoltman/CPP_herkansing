@@ -10,8 +10,8 @@
 
 class Sector_ship : public Sector_item {
 public:
+    Sector_ship():Sector_item('P'){};
     char get_type() const override;
-    void print();
 };
 
 
