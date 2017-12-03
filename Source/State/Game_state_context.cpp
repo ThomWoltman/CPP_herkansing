@@ -56,12 +56,12 @@ void Game_state_context::next_sector(int x, int y) {
     int next_x = get_current_sector().get_player_x() - 9*x;
     int next_y = get_current_sector().get_player_y() - 9*y;
 
-    currentsector_x += x;
-    currentsector_y += y;
-
-    if(currentsector_x < 0 || currentsector_x > 4 || currentsector_y < 0 || currentsector_y > 4)
+    if(currentsector_x + x < 0 || currentsector_x + x > 4 || currentsector_y + y < 0 || currentsector_y + y > 4){
         set_state(0);
+    }
     else{
+        currentsector_x += x;
+        currentsector_y += y;
         get_current_sector().initialize(next_x,next_y);
     }
 }

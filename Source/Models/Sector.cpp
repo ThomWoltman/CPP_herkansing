@@ -187,22 +187,16 @@ void Sector::move_meetings() {
             if(field[y][x]->get_type() =='O'){
                int t_x = x;
                int t_y = y;
-                if(player_x < x){
+                if(player_x < x && field[y][x-1]->get_type() != 'P'){
                     swap_fields(t_x, t_y, t_x-1, t_y);
                     t_x = t_x-1;
-
-
-                }else{
-                    swap_fields(t_x, t_y, t_x+1, t_y);
-                    t_x = t_x+1;
-                }
-
-                if(player_y < t_y){
+                }else if(player_y < t_y && field[y-1][x]->get_type() != 'P'){
                     swap_fields(t_x, t_y, t_x, t_y-1);
                     t_y = t_y-1;
-
-
-                }else{
+                }else if(player_x > x && field[y][x+1]->get_type() != 'P'){
+                    swap_fields(t_x, t_y, t_x+1, t_y);
+                    t_x = t_x+1;
+                }else if(player_y > t_y && field[y+1][x]->get_type() != 'P'){
                     swap_fields(t_x, t_y, t_x, t_y+1);
                     t_y = t_y+1;
 
