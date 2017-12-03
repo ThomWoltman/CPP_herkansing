@@ -15,7 +15,13 @@ public:
 
     friend ostream& operator<<(ostream& strm, Package &package) {
         if(strm){
-            strm << package.inhoud << " - " << package.bestemming;
+            strm << "package: ";
+            strm << package.inhoud << " - " << package.bestemming << " --> ";
+            if(package.sector_x != -1){
+                strm << "Sector (" << package.sector_x << "," << package.sector_y << ")";
+                strm << " - ";
+                strm << "Planet (" << package.x << "," << package.y << ")";
+            }
         }
 
         return strm;
@@ -25,10 +31,20 @@ public:
         return inhoud.is_empty() && bestemming.is_empty();
     }
 
+    void set_planet_position(const int sec_x, const int sec_y, const int planet_x, const int planet_y){
+        sector_x = sec_x;
+        sector_y = sec_y;
+        x = planet_x;
+        y = planet_y;
+    }
+
 private:
     String inhoud;
     String bestemming;
-
+    int sector_x = -1;
+    int sector_y = -1;
+    int x = -1;
+    int y = -1;
 };
 
 #endif //CPP_HERKANSING_PAKAGE_H

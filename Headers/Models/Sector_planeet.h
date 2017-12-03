@@ -10,8 +10,13 @@
 
 class Sector_planeet : public Sector_item {
 public:
-    Sector_planeet():Sector_item('@'){};
+    Sector_planeet(int x, int y):Sector_item('@'), x{x}, y{y}{};
     char get_type() const override;
+    const int get_x() const {return x;};
+    const int get_y() const {return y;};
+private:
+    int x;
+    int y;
 };
 
 

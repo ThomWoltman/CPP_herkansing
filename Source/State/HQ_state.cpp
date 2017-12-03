@@ -9,13 +9,22 @@ void HQ_state::run(Player &player, Game_state_context &context) {
     context.clear_sectors();
     context.add_sectors();
 
-    for(int i = 0; i < 25; i++){
-        Sector s;
-        s = context.get_sectors()[i];
-        std::cout << s.get_astr() << s.get_ont() << s.get_pla() << " ";
-        if(i!=0 && (i+1) % 5 == 0)
-            std::cout << std::endl;
+    for(int y = 0; y < 5; y++){
+        for(int x = 0; x < 5; x++){
+            Sector* s = context.get_sector(x, y);
+            if(s!= nullptr)
+                std::cout << s->get_astr() << s->get_ont() << s->get_pla() << " ";
+        }
+        std::cout << std::endl;
     }
+//
+//    for(int i = 0; i < 25; i++){
+//        Sector s;
+//        s = context.get_sectors()[i];
+//        std::cout << s.get_astr() << s.get_ont() << s.get_pla() << " ";
+//        if(i!=0 && (i+1) % 5 == 0)
+//            std::cout << std::endl;
+//    }
 
     bool corect_input = false;
     int x = 0;

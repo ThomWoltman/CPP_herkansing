@@ -21,6 +21,7 @@ public:
     //void add_sector(const Sector &sector);
     void add_sectors();
     Sector& get_current_sector();
+    Sector* get_sector(const int x, const int y);
     void set_current_sector(int x, int y);
     Package& get_current_package();
     void set_current_package(Package);

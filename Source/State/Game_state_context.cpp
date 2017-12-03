@@ -47,7 +47,14 @@ void Game_state_context::add_sectors() {
 }
 
 Sector& Game_state_context::get_current_sector() {
-    return sectors[currentsector_x][currentsector_y];
+    return sectors[currentsector_y][currentsector_x];
+}
+
+Sector* Game_state_context::get_sector(const int x, const int y) {
+    if(x >= 0 && x < 5 && y >= 0 && y < 5){
+        return &sectors[y][x];
+    }
+    return nullptr;
 }
 
 void Game_state_context::set_current_sector(const int x, const int y) {

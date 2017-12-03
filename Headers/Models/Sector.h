@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Sector_item.h"
 #include "../Libs/Vector.h"
+#include "Sector_planeet.h"
 
 using namespace std;
 
@@ -83,7 +84,7 @@ public:
     bool move_up();
     bool move_down();
     bool next_to(const char);
-
+    Sector_planeet* get_planet();
 
     const int get_player_x() const {return player_x;};
     const int get_player_y() const {return player_y;};

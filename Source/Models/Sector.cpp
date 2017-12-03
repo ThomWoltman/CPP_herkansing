@@ -35,6 +35,14 @@ void Sector::initialize(const int x_pos, const int y_pos) {
         create_field();
         is_initialized = true;
     }
+    else if(x_pos != -1 && y_pos != -1){
+        delete field[player_y][player_x];
+        field[player_y][player_x] = new Sector_emty();
+        player_x = x_pos;
+        player_y = y_pos;
+        delete field[player_y][player_x];
+        field[player_y][player_x] = new Sector_ship();
+    }
 }
 
 void Sector::create_field() {
@@ -74,7 +82,7 @@ void Sector::create_field() {
         auto y =  random.get_random(0,9);
         if(field[y][x]->get_type() == '.') {
             delete field[y][x];
-            field[y][x] = new Sector_planeet();
+            field[y][x] = new Sector_planeet(x, y);
             counter_pla++;
         }
     }
@@ -219,4 +227,15 @@ bool Sector::swap_fields(int x1, int y1, int x2, int y2) {
         field[y2][x2] = f;
     }
     return can_swap;
+}
+
+Sector_planeet* Sector::get_planet() {
+    for(int y = 0; y < 10; y++){
+        for(int x = 0; x < 10; x++){
+            if(field[y][x]->get_type() == '@'){
+                return dynamic_cast<Sector_planeet*>(field[y][x]);
+            }
+        }
+    }
+    return nullptr;
 }
