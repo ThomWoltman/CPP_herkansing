@@ -1,0 +1,8 @@
+//
+// Created by administrator on 3-12-17.
+//
+
+#ifndef CPP_HERKANSING_MEETING_STATE_H
+#define CPP_HERKANSING_MEETING_STATE_H
+
+#endif //CPP_HERKANSING_MEETING_STATE_H
