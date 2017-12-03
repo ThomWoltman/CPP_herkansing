@@ -109,7 +109,11 @@ void Sector_state::run(Player &player, Game_state_context &context) {
         context.set_state(2);
     }
     else{
-        std::cout << "move: [w]-[a]-[s]-[d]" << std::endl << "actions: " << "[pick up(p)]-[deliver(e)]-[view package(v)]-[do nothing(n)]-[quit(q)]: " << std::endl;
+        std::cout << "move: [w]-[a]-[s]-[d]" << std::endl << "actions: ";
+        if(context.get_current_sector().next_to('@')){
+            std::cout << "[pick up(p)]-";
+        }
+        std::cout << "[deliver(e)]-[view package(v)]-[do nothing(n)]-[quit(q)]: " << std::endl;
         handle_input(player, context);
         context.get_current_sector().move_meetings();
     }
@@ -140,7 +144,7 @@ void Sector_state::handle_input(Player &player, Game_state_context &context) {
         if(!context.get_current_sector().move_down()){
             context.next_sector(0,1);
         }
-    }else if(str == "pick up" || str == "p"){
+    }else if(context.get_current_sector().next_to('@') && (str == "pick up" || str == "p")){
         if( context.get_current_sector().next_to('@')){
             pick_up_package(context);
         }
