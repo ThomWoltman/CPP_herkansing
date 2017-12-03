@@ -6,12 +6,15 @@
 #include "../../Headers/State/HQ_state.h"
 #include "../../Headers/State/Sector_state.h"
 #include "../../Headers/State/Meeting_state.h"
+#include "../../Headers/State/Fight_state.h"
 
-Game_state_context::Game_state_context() : states{Vector<Game_state*>{2}} {
+Game_state_context::Game_state_context() : states{Vector<Game_state*>{3}} {
     currentstate = 0;
     states.push_back(new HQ_state);
     states.push_back(new Sector_state);
     states.push_back(new Meeting_state);
+    states.push_back(new Fight_state);
+
 
 }
 
@@ -81,4 +84,10 @@ Package& Game_state_context::get_current_package() {
 }
 void Game_state_context::set_current_package(Package package) {
     current_package = package;
+}
+Meeting& Game_state_context::get_current_meeting() {
+    return current_meeting;
+}
+void Game_state_context::set_current_meeting(Meeting meeting) {
+    current_meeting = meeting;
 }

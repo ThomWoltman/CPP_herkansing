@@ -8,6 +8,7 @@
 #include "../Libs/Vector.h"
 #include "../Models/Sector.h"
 #include "../Models/Package.h"
+#include "../Models/Meeting.h"
 
 class Game_state;
 class Game_state_context {
@@ -25,6 +26,8 @@ public:
     void set_current_sector(int x, int y);
     Package& get_current_package();
     void set_current_package(Package);
+    Meeting& get_current_meeting();
+    void set_current_meeting(Meeting);
 
     void game_over(){
         winning = false;
@@ -44,6 +47,7 @@ private:
     int currentsector_y = -1;
     bool winning = true;
     Package current_package = Package();
+    Meeting current_meeting = Meeting();
 };
 
 
