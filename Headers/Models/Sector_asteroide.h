@@ -10,10 +10,8 @@
 
 class Sector_asteroide : public Sector_item {
 public:
+    Sector_asteroide() : Sector_item('O'){};
     char get_type() const override;
-    void print();
-
-
 };
 
 

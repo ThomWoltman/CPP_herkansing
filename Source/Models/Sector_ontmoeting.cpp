@@ -4,9 +4,7 @@
 
 #include <iostream>
 #include "../../Headers/Models/Sector_ontmoeting.h"
-void Sector_ontmoeting::print() {
-    std::cout<<"*";
-}
+
 char Sector_ontmoeting::get_type() const {
-    return '*';
+    return type;
 }

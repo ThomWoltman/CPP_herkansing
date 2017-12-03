@@ -63,7 +63,7 @@ public:
 
                 for(int y = 0; y < 10; y++){
                     for(int x = 0; x < 10; x++){
-                        strm << sector.field[y][x]->get_type();
+                        strm << *sector.field[y][x];
                     }
                     strm << endl;
                 }

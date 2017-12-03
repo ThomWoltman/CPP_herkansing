@@ -10,10 +10,8 @@
 
 class Sector_planeet : public Sector_item {
 public:
+    Sector_planeet():Sector_item('@'){};
     char get_type() const override;
-
-
-    void print();
 };
 
 
