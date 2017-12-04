@@ -45,12 +45,58 @@ void Meeting_state::handle_input(Player &player, Game_state_context &context) {
 
         }else{
             cout << context.get_current_meeting().succes_bender<< endl;
+            context.set_state(1);
+            context.set_current_meeting(Meeting());
 
         }
     }
     if(input == "leella" ||input == "l"){
         cout << context.get_current_meeting().tekst_leela<< endl;
+
         cout << context.get_current_meeting().onderhandeling_leela<< endl;
+        String outcome = context.get_current_meeting().onderhandeling_leela;
+        Vector<char> parse(300);
+
+        for(int x = 0 ; x < sizeof(outcome.get_string()); x ++){
+            if(outcome.get_string()[x] == '['){
+                int counter = 0;
+                while(outcome.get_string()[x] != ']'){
+                    parse.push_back(outcome.get_string()[x])  ;
+                    x++;
+                    counter++;
+                }
+                parse.push_back(']');
+                break;
+            }
+        }
+
+        char parse_char[parse.length()];
+        for(int i = 0 ; i < parse.length(); i++){
+            parse_char[i] = parse[i];
+        }
+        outcome = parse_char;
+
+        if(outcome.operator==("[0]")){
+            context.set_state(1);
+            context.set_current_meeting(Meeting());
+        }
+        else if(outcome == "[vp+1]"){
+            player.add_win_point();
+            context.set_state(1);
+            context.set_current_meeting(Meeting());
+
+        }
+        else if(outcome == "[vp-1]"){
+            context.set_state(1);
+            context.set_current_meeting(Meeting());
+        }
+        else if(outcome == "[repair]"){
+            context.set_state(1);
+            context.set_current_meeting(Meeting());
+        }else{
+
+        }
+
 
     }
     if(input == "fry" ||input == "f"){

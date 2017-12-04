@@ -18,5 +18,14 @@ void Player::add_damage(const int dmg) {
 }
 
 void Player::add_win_point() { win_points++;}
+void Player::remove_win_point() {
+    if(win_points > 0){
+        win_points--;
+
+    }else{
+
+    }
+}
+
 
 const int Player::get_win_point() const {return win_points;}
