@@ -5,11 +5,11 @@
 #include <iostream>
 #include "../../Headers/Models/Player.h"
 
-Player::Player(int coins): coins{coins}, damage{0}{
+Player::Player() : damage{0}{
 
 }
 
-void Player::reset_dmg() {
+void Player::repair() {
     damage = 0;
 }
 
@@ -21,11 +21,10 @@ void Player::add_win_point() { win_points++;}
 void Player::remove_win_point() {
     if(win_points > 0){
         win_points--;
-
-    }else{
-
     }
 }
 
 
 const int Player::get_win_point() const {return win_points;}
+
+const int Player::get_damage() const { return damage;}

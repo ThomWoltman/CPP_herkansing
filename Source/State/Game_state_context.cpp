@@ -89,3 +89,8 @@ Meeting& Game_state_context::get_current_meeting() {
 void Game_state_context::set_current_meeting(Meeting meeting) {
     current_meeting = meeting;
 }
+
+void Game_state_context::set_damage(const int min, const int max) {
+    min_damage = min;
+    max_damage = max;
+}

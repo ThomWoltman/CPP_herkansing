@@ -9,6 +9,7 @@
 #include "Sector_item.h"
 #include "../Libs/Vector.h"
 #include "Sector_planeet.h"
+#include "Sector_ontmoeting.h"
 
 using namespace std;
 
@@ -85,9 +86,12 @@ public:
     bool move_down();
     bool next_to(const char);
     Sector_planeet* get_planet();
+    void remove(int x, int y);
+    Sector_ontmoeting* is_next_to_meeting();
 
     const int get_player_x() const {return player_x;};
     const int get_player_y() const {return player_y;};
+
 private:
     bool is_initialized;
     int astr;

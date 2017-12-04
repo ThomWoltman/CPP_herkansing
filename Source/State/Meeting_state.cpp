@@ -5,28 +5,27 @@
 #include "../../Headers/State/Meeting_state.h"
 #include "../../Headers/Libs/CSV_reader_meeting.h"
 #include "../../Headers/Libs/Random.h"
+#include "../../Headers/State/Fight_state.h"
 
 Meeting_state::Meeting_state() {}
 Meeting_state::~Meeting_state() {}
 void Meeting_state::run(Player &player, Game_state_context &context) {
-    cout<<"Meeting state";
+    cout<<"Meeting state" << endl;
     if(context.get_current_meeting().is_empty()){
         CSV_reader_meeting reader;
         String s;
-        s.operator=("/home/administrator/Documents/CPP_herkansing/Data/Ontmoetingen.csv");
-        auto b = reader.get_data(s);
-
-        Random random;
-        int random_number = random.get_random(0, b.length());
-        context.set_current_meeting(b[random_number]);
-
+        //s.operator=("/home/administrator/Documents/CPP_herkansing/Data/Ontmoetingen.csv");
+        s.operator=("/home/administrator/CLionProjects/CPP_herkansing/Data/Ontmoetingen.csv");
+        meetings = reader.get_data(s);
     }
-    cout << context.get_current_meeting();
+    Random random;
+    int random_number = random.get_random(0, meetings.length()-1);
+    context.set_current_meeting(meetings[random_number]);
 
-    cout<<"Which crew member do you want to chose"<<endl;
-    cout<<"-bender"<<endl;
-    cout<<"-leella"<<endl;
-    cout<<"-fry"<<endl;
+    cout << "Meeting: "<< context.get_current_meeting() << endl;
+
+    cout<<"Which crew member do you want to choose"<<endl;
+    cout<<"[bender]-[leella]-[fry]"<<endl;
 
     handle_input(player,context);
 }
@@ -38,69 +37,113 @@ void Meeting_state::handle_input(Player &player, Game_state_context &context) {
     if(input == "bender" ||input == "b"){
     Random random;
         int random_number = random.get_random(0,1);
+        String str;
+        auto& meeting = context.get_current_meeting();
         if(random_number ==0 ){
-            cout << context.get_current_meeting().gefaald_bender<< endl;
-            context.set_state(3);
-
-
+            str = context.get_current_meeting().gefaald_bender;
         }else{
-            cout << context.get_current_meeting().succes_bender<< endl;
-            context.set_state(1);
-            context.set_current_meeting(Meeting());
-
+            str = context.get_current_meeting().succes_bender;
         }
+        handle_consequence(str, player,context);
     }
     if(input == "leella" ||input == "l"){
         cout << context.get_current_meeting().tekst_leela<< endl;
 
-        cout << context.get_current_meeting().onderhandeling_leela<< endl;
-        String outcome = context.get_current_meeting().onderhandeling_leela;
-        Vector<char> parse(300);
+        String consequence = context.get_current_meeting().onderhandeling_leela;
 
-        for(int x = 0 ; x < sizeof(outcome.get_string()); x ++){
-            if(outcome.get_string()[x] == '['){
-                int counter = 0;
-                while(outcome.get_string()[x] != ']'){
-                    parse.push_back(outcome.get_string()[x])  ;
-                    x++;
-                    counter++;
+        handle_consequence(consequence, player, context);
+    }
+    if(input == "fry" ||input == "f"){
+        String str = context.get_current_meeting().gevecht_fry;
+        handle_consequence(str, player, context);
+    }
+}
+
+void Meeting_state::handle_consequence(String& str, Player &player, Game_state_context &context) {
+    if(str == "[0]"){ // niks
+        context.set_state(1);
+        cout << "nothing happened .." << endl;
+    }
+    else if(str == "[vp+1]"){ //+1 overwinning
+        cout << "win point!!" << endl;
+        player.add_win_point();
+        context.set_state(1);
+    }
+    else if(str == "[vp-1]"){ //-1 overwinning
+        cout << "you lost a win point =(" << endl;
+        player.remove_win_point();
+        context.set_state(1);
+    }
+    else if(str == "[repair]"){ // alle schadepunten repareren
+        cout << "ship is repaired!" << endl;
+        player.repair();
+        context.set_state(1);
+    }
+    else if(str[0] == '['){
+        char min[3];
+        char max[3];
+
+        int counter = 0;
+        int index = 1;
+
+        while(str[index] != '-'){
+            min[counter] = str[index];
+            counter++;
+            index++;
+        }
+        index++;
+        min[counter] = '\0';
+        counter = 0;
+        while(str[index] != ']'){
+            max[counter] = str[index];
+            counter++;
+            index++;
+        }
+        max[counter] = '\0';
+
+        context.set_state(3);
+        context.set_damage(atoi(min), atoi(max));
+    }
+    else {
+        cout << str << " - string" << endl;
+        char text[200];
+        int text_counter = 0;
+        char consequence[100];
+        int consequence_counter = 0;
+
+        bool found_bracket = false;
+        for(int i = 0; i < std::strlen(str.get_string()); i++){
+            if(found_bracket){
+                consequence[consequence_counter] = str[i];
+                consequence_counter++;
+                if(str[i] == ']'){
+                    break;
                 }
-                parse.push_back(']');
-                break;
+            }
+            else{
+                if(str[i] == '['){
+                    found_bracket = true;
+                    text[text_counter] = '\0';
+                    consequence[consequence_counter] = str[i];
+                    consequence_counter++;
+                }
+                else{
+                    text[text_counter] = str[i];
+                    text_counter++;
+                }
             }
         }
 
-        char parse_char[parse.length()];
-        for(int i = 0 ; i < parse.length(); i++){
-            parse_char[i] = parse[i];
-        }
-        outcome = parse_char;
+        if(text_counter > 0)
+            cout << "text:" << text << endl;
 
-        if(outcome.operator==("[0]")){
+        if(consequence_counter > 0){
+            cout << "cons:" << consequence << endl;
+            String co{consequence};
+            handle_consequence(co, player, context);
+        }
+        else{
             context.set_state(1);
-            context.set_current_meeting(Meeting());
         }
-        else if(outcome == "[vp+1]"){
-            player.add_win_point();
-            context.set_state(1);
-            context.set_current_meeting(Meeting());
-
-        }
-        else if(outcome == "[vp-1]"){
-            context.set_state(1);
-            context.set_current_meeting(Meeting());
-        }
-        else if(outcome == "[repair]"){
-            context.set_state(1);
-            context.set_current_meeting(Meeting());
-        }else{
-
-        }
-
-
-    }
-    if(input == "fry" ||input == "f"){
-        cout << context.get_current_meeting().gevecht_fry<< endl;
-        context.set_state(3);
     }
 }

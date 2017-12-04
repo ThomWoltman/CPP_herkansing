@@ -15,7 +15,7 @@ class Game_state;
 
 class Game {
 public:
-    Game(int coins);
+    Game();
     void run();
     void quit();
 

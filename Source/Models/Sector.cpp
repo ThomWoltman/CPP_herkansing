@@ -37,7 +37,7 @@ void Sector::initialize(const int x_pos, const int y_pos) {
     }
     else if(x_pos != -1 && y_pos != -1){
         delete field[player_y][player_x];
-        field[player_y][player_x] = new Sector_emty();
+        field[player_y][player_x] = new Sector_empty();
         player_x = x_pos;
         player_y = y_pos;
         delete field[player_y][player_x];
@@ -48,7 +48,7 @@ void Sector::initialize(const int x_pos, const int y_pos) {
 void Sector::create_field() {
     for(int y = 0; y < 10; y++){
         for(int x = 0; x < 10; x++){
-            field[y][x] = new Sector_emty();
+            field[y][x] = new Sector_empty();
         }
     }
 
@@ -108,7 +108,7 @@ void Sector::create_field() {
         auto y =  random.get_random(0,9);
         if(field[y][x]->get_type() == '.') {
             delete field[y][x];
-            field[y][x] = new Sector_ontmoeting();
+            field[y][x] = new Sector_ontmoeting(x, y);
             counter_ont++;
         }
     }
@@ -164,25 +164,13 @@ bool Sector::next_to(const char c) {
     if((!is_out_of_bounds(player_x, player_y, player_x, player_y-1)) && field[player_y-1][player_x]->get_type() == c){
        next_planet = true;
     }
-    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y-1))&&field[player_y-1][player_x-1]->get_type() == c){
-        next_planet = true;
-    }
     if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y )) && field[player_y][player_x-1]->get_type() == c){
-        next_planet = true;
-    }
-    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y+1)) && field[player_y+1][player_x+1]->get_type() == c){
         next_planet = true;
     }
     if((!is_out_of_bounds(player_x, player_y, player_x, player_y+1)) && field[player_y+1][player_x]->get_type() == c){
         next_planet = true;
     }
     if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y))&&field[player_y][player_x+1]->get_type() == c){
-        next_planet = true;
-    }
-    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y-1))&&field[player_y-1][player_x+1]->get_type() == c){
-        next_planet = true;
-    }
-    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y+1))&&field[player_y+1][player_x-1]->get_type() == c){
         next_planet = true;
     }
 
@@ -193,23 +181,29 @@ void Sector::move_meetings() {
     for(int y = 0; y < 10; y++){
         for(int x = 0; x < 10; x++){
             if(field[y][x]->get_type() =='*'){
-               int t_x = x;
-               int t_y = y;
-                if(player_x < x && field[y][x-1]->get_type() != 'P'){
-                    swap_fields(t_x, t_y, t_x-1, t_y);
-                    t_x = t_x-1;
-                }else if(player_y < t_y && field[y-1][x]->get_type() != 'P'){
-                    swap_fields(t_x, t_y, t_x, t_y-1);
-                    t_y = t_y-1;
-                }else if(player_x > x && field[y][x+1]->get_type() != 'P'){
-                    swap_fields(t_x, t_y, t_x+1, t_y);
-                    t_x = t_x+1;
-                }else if(player_y > t_y && field[y+1][x]->get_type() != 'P'){
-                    swap_fields(t_x, t_y, t_x, t_y+1);
-                    t_y = t_y+1;
-
-
+               auto ontmoeting = dynamic_cast<Sector_ontmoeting*>(field[y][x]);
+               if(!ontmoeting->get_is_moved()){
+                   int t_x = x;
+                   int t_y = y;
+                    if(player_x < x && field[y][x-1]->get_type() != 'P'){
+                        swap_fields(t_x, t_y, t_x-1, t_y);
+                        ontmoeting->set_x(t_x-1);
+                        t_x = t_x-1;
+                    }else if(player_y < t_y && field[y-1][x]->get_type() != 'P'){
+                        swap_fields(t_x, t_y, t_x, t_y-1);
+                        ontmoeting->set_y(t_y-1);
+                        t_y = t_y-1;
+                    }else if(player_x > x && field[y][x+1]->get_type() != 'P'){
+                        swap_fields(t_x, t_y, t_x+1, t_y);
+                        ontmoeting->set_x(t_x+1);
+                        t_x = t_x+1;
+                    }else if(player_y > t_y && field[y+1][x]->get_type() != 'P'){
+                        swap_fields(t_x, t_y, t_x, t_y+1);
+                        ontmoeting->set_y(t_y+1);
+                        t_y = t_y+1;
+                    }
                 }
+                ontmoeting->toggle_is_moved();
             }
         }
     }
@@ -238,4 +232,27 @@ Sector_planeet* Sector::get_planet() {
         }
     }
     return nullptr;
+}
+
+void Sector::remove(const int x, const int y) {
+    delete field[y][x];
+    field[y][x] = new Sector_empty();
+}
+
+Sector_ontmoeting* Sector::is_next_to_meeting() {
+    Sector_ontmoeting* ontmoeting = nullptr;
+    if((!is_out_of_bounds(player_x, player_y, player_x, player_y-1)) && field[player_y-1][player_x]->get_type() == '*'){
+        ontmoeting = dynamic_cast<Sector_ontmoeting*>(field[player_y-1][player_x]);
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x-1, player_y )) && field[player_y][player_x-1]->get_type() == '*'){
+        ontmoeting = dynamic_cast<Sector_ontmoeting*>(field[player_y][player_x-1]);
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x, player_y+1)) && field[player_y+1][player_x]->get_type() == '*'){
+        ontmoeting = dynamic_cast<Sector_ontmoeting*>(field[player_y+1][player_x]);
+    }
+    if((!is_out_of_bounds(player_x, player_y, player_x+1, player_y))&&field[player_y][player_x+1]->get_type() == '*'){
+        ontmoeting = dynamic_cast<Sector_ontmoeting*>(field[player_y][player_x+1]);
+    }
+
+    return ontmoeting;
 }

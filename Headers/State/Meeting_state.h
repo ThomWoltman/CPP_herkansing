@@ -15,7 +15,8 @@ public:
     void run(Player &player, Game_state_context &context);
 private:
     void handle_input(Player &player, Game_state_context &context);
-
+    void handle_consequence(String& str, Player &player, Game_state_context &context);
+    Vector<Meeting> meetings;
 };
 
 #endif //CPP_HERKANSING_MEETING_STATE_H

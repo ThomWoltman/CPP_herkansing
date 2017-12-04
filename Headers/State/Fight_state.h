@@ -11,10 +11,13 @@
 class Fight_state : public Game_state {
 public:
     Fight_state();
+
     ~Fight_state() override;
     void run(Player &player, Game_state_context &context);
 private:
     void handle_input(Player &player, Game_state_context &context);
+    int round = 1;
+    int hits = 0;
 
 };
 

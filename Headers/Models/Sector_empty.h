@@ -8,9 +8,9 @@
 
 #include "Sector_item.h"
 
-class Sector_emty : public Sector_item{
+class Sector_empty : public Sector_item{
 public:
-    Sector_emty() : Sector_item('.'){};
+    Sector_empty() : Sector_item('.'){};
     char get_type() const override;
 };
 

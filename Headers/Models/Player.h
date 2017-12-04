@@ -9,17 +9,17 @@ class Game_state;
 
 class Player {
 
-    public:
-        Player(int coins);
-        void reset_dmg();
-        void add_damage(int dmg);
-        void add_win_point();
-        void remove_win_point();
+public:
+    Player();
+    void repair();
+    void add_damage(int dmg);
+    void add_win_point();
+    void remove_win_point();
     const int get_win_point() const;
-    private:
-        int coins;
-        int damage;
-        int win_points = 0;
+    const int get_damage() const;
+private:
+    int damage = 0;
+    int win_points = 0;
 };
 
 

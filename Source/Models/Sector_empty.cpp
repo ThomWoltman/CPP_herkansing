@@ -6,6 +6,6 @@
 #include "../../Headers/Models/Sector_empty.h"
 
 
-char Sector_emty::get_type() const {
+char Sector_empty::get_type() const {
     return type;
 }

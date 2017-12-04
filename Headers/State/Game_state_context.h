@@ -39,6 +39,9 @@ public:
     void clear_sectors();
     const int get_current_sector_x() const {return currentsector_x;}
     const int get_current_sector_y() const {return currentsector_y;}
+    void set_damage(const int min, const int max);
+    const int get_min_damage() const {return min_damage;}
+    const int get_max_damage() const {return max_damage;}
 private:
     Vector<Game_state*> states;
     int currentstate;
@@ -48,6 +51,8 @@ private:
     bool winning = true;
     Package current_package = Package();
     Meeting current_meeting = Meeting();
+    int min_damage;
+    int max_damage;
 };
 
 

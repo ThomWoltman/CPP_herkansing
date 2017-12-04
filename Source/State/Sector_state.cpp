@@ -1,17 +1,5 @@
-//
-// Created by administrator on 27-11-17.
-//
-
 #include <limits>
 #include "../../Headers/State/Sector_state.h"
-#include "../../Headers/Models/Sector_item.h"
-#include "../../Headers/Models/Sector_empty.h"
-#include "../../Headers/Libs/String.h"
-#include "../../Headers/Libs/Random.h"
-#include "../../Headers/Models/Sector_planeet.h"
-#include "../../Headers/Models/Sector_asteroide.h"
-#include "../../Headers/Models/Sector_ontmoeting.h"
-#include "../../Headers/Models/Sector_ship.h"
 #include "../../Headers/Libs/CSV_reader.h"
 
 Sector_state::Sector_state() {
@@ -40,6 +28,7 @@ void Sector_state::pick_up_package(Game_state_context & game_context) {
             break;
         }
         else if(game_context.get_sector(current_x_pos - x, current_y_pos - y) != nullptr && game_context.get_sector(current_x_pos - x, current_y_pos - y)->get_pla() > 0){
+            game_context.get_sector(current_x_pos - x, current_y_pos - y)->initialize();
             planet_x = game_context.get_sector(current_x_pos - x, current_y_pos - y)->get_planet()->get_x();
             planet_y = game_context.get_sector(current_x_pos - x, current_y_pos - y)->get_planet()->get_y();
             sector_x = current_x_pos - x;
@@ -47,6 +36,7 @@ void Sector_state::pick_up_package(Game_state_context & game_context) {
             break;
         }
         else if(game_context.get_sector(current_x_pos + x, current_y_pos - y)!=nullptr&&game_context.get_sector(current_x_pos + x, current_y_pos - y)->get_pla() > 0){
+            game_context.get_sector(current_x_pos + x, current_y_pos - y)->initialize();
             planet_x = game_context.get_sector(current_x_pos + x, current_y_pos - y)->get_planet()->get_x();
             planet_y = game_context.get_sector(current_x_pos + x, current_y_pos - y)->get_planet()->get_y();
             sector_x = current_x_pos + x;
@@ -54,6 +44,7 @@ void Sector_state::pick_up_package(Game_state_context & game_context) {
             break;
         }
         else if(game_context.get_sector(current_x_pos - x, current_y_pos + y)!= nullptr&&game_context.get_sector(current_x_pos - x, current_y_pos + y)->get_pla() > 0){
+            game_context.get_sector(current_x_pos - x, current_y_pos + y)->initialize();
             planet_x = game_context.get_sector(current_x_pos - x, current_y_pos + y)->get_planet()->get_x();
             planet_y = game_context.get_sector(current_x_pos - x, current_y_pos + y)->get_planet()->get_y();
             sector_x = current_x_pos - x;
@@ -107,7 +98,9 @@ void Sector_state::run(Player &player, Game_state_context &context) {
     std::cout << context.get_current_sector() << std::endl;
     std::cout << context.get_current_package() << std::endl;
 
-    if(context.get_current_sector().next_to('*')){
+    auto meeting = context.get_current_sector().is_next_to_meeting();
+    if(meeting){
+        context.get_current_sector().remove(meeting->get_x(), meeting->get_y());
         context.set_state(2);
     }
     else{

@@ -5,6 +5,6 @@
 #include "../../Headers/Libs/String.h"
 
 const bool String::is_empty() const {
-    return cstring[0] == '\0';
+    return cstring == nullptr ||  cstring[0] == '\0';
 }
 
