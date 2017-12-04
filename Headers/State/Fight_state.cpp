@@ -24,8 +24,7 @@ void Fight_state::run(Player &player, Game_state_context &context) {
     else{
         int hit = random.get_random(0,1);
         if(hit == 1){
-            cout<<"you hit the enemy! hits("<<hits<<")"<< endl;
-            hits++;
+            cout<<"you hit the enemy! hits("<<++hits<<")"<< endl;
             if(hits >= 3){
                 context.set_state(1);
                 round = 1;

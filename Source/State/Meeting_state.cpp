@@ -46,16 +46,19 @@ void Meeting_state::handle_input(Player &player, Game_state_context &context) {
         }
         handle_consequence(str, player,context);
     }
-    if(input == "leella" ||input == "l"){
+    else if(input == "leella" ||input == "l"){
         cout << context.get_current_meeting().tekst_leela<< endl;
 
         String consequence = context.get_current_meeting().onderhandeling_leela;
 
         handle_consequence(consequence, player, context);
     }
-    if(input == "fry" ||input == "f"){
+    else if(input == "fry" ||input == "f"){
         String str = context.get_current_meeting().gevecht_fry;
         handle_consequence(str, player, context);
+    }
+    else{
+        handle_input(player, context);
     }
 }
 

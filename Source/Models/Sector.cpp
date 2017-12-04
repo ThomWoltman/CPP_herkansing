@@ -178,11 +178,15 @@ bool Sector::next_to(const char c) {
 }
 
 void Sector::move_meetings() {
+    Sector_ontmoeting* ontmoetingen[3];
+    int counter = 0;
     for(int y = 0; y < 10; y++){
         for(int x = 0; x < 10; x++){
             if(field[y][x]->get_type() =='*'){
                auto ontmoeting = dynamic_cast<Sector_ontmoeting*>(field[y][x]);
                if(!ontmoeting->get_is_moved()){
+                   ontmoetingen[counter] = ontmoeting;
+                   counter++;
                    int t_x = x;
                    int t_y = y;
                     if(player_x < x && field[y][x-1]->get_type() != 'P'){
@@ -202,10 +206,14 @@ void Sector::move_meetings() {
                         ontmoeting->set_y(t_y+1);
                         t_y = t_y+1;
                     }
+                   ontmoeting->toggle_is_moved();
                 }
-                ontmoeting->toggle_is_moved();
+
             }
         }
+    }
+    for(int i = 0; i < counter; i++){
+        ontmoetingen[i]->toggle_is_moved();
     }
 }
 

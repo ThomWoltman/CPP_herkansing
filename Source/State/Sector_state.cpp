@@ -90,6 +90,10 @@ void Sector_state::pick_up_package(Game_state_context & game_context) {
 }
 
 void Sector_state::run(Player &player, Game_state_context &context) {
+    if(player.get_win_point() >= 10){
+        std::cout << "you won!!!!!" << std::endl;
+        context.set_state(0);
+    }
     auto pkg = context.get_current_package();
     std::cout << "win points: " << player.get_win_point() << std::endl;
     std::cout << "Sector" << std::endl;
