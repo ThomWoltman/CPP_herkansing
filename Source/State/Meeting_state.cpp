@@ -108,7 +108,7 @@ void Meeting_state::handle_consequence(String& str, Player &player, Game_state_c
         context.set_damage(atoi(min), atoi(max));
     }
     else {
-        cout << str << " - string" << endl;
+        //cout << str << " - string" << endl;
         char text[200];
         int text_counter = 0;
         char consequence[100];

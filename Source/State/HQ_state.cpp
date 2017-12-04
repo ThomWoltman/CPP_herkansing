@@ -6,6 +6,7 @@
 void HQ_state::run(Player &player, Game_state_context &context) {
     player.set_win_points(0);
     player.set_damage(0);
+    context.set_current_package(Package());
 
     std::cout << "Headquarters" << std::endl;
 
