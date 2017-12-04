@@ -17,6 +17,8 @@ public:
     void remove_win_point();
     const int get_win_point() const;
     const int get_damage() const;
+    void set_win_points(const int points);
+    void set_damage(const int dmg);
 private:
     int damage = 0;
     int win_points = 0;

@@ -28,3 +28,6 @@ void Player::remove_win_point() {
 const int Player::get_win_point() const {return win_points;}
 
 const int Player::get_damage() const { return damage;}
+
+void Player::set_damage(const int dmg) {damage = dmg;}
+void Player::set_win_points(const int points) {win_points = points;}

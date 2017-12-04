@@ -4,6 +4,9 @@
 #include "../../Headers/Models/Sector.h"
 
 void HQ_state::run(Player &player, Game_state_context &context) {
+    player.set_win_points(0);
+    player.set_damage(0);
+
     std::cout << "Headquarters" << std::endl;
 
     context.clear_sectors();
